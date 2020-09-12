@@ -46,9 +46,7 @@ self.view.addSubview(videoTrim)
 
 done!
 
-<br><br><br>
-
-
+<br>
 
 ### Property
 
@@ -102,7 +100,7 @@ videoTrim.durationTime // CMTime from start time to end time.
 
 ```
 
-<br><br>
+<br>
 
 ### Delegate
 
@@ -133,7 +131,6 @@ extension ViewController: VideoTrimDelegate {
 }
 
 ```
-
 
 ## Author
 
