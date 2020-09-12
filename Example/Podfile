@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'VideoTrim_Example' do
+  pod 'VideoTrim', :path => '../'
+
+  target 'VideoTrim_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

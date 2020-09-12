@@ -1,0 +1,16 @@
+PODS:
+  - VideoTrim (0.1.0)
+
+DEPENDENCIES:
+  - VideoTrim (from `../`)
+
+EXTERNAL SOURCES:
+  VideoTrim:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  VideoTrim: 2b201d40dcc7ec94a5e2337f621f0f2b14b462b1
+
+PODFILE CHECKSUM: e28bb48aadb9229522e22b9bdf8bf508c19b5da1
+
+COCOAPODS: 1.10.0.beta.2
