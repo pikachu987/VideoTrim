@@ -159,28 +159,58 @@ open class VideoTrim: UIView {
     }
 
     public var startTime: CMTime {
-        guard let asset = self.asset,
-            let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return .zero }
-        let startTimeWidth = leadingConstraint.constant
-        let duration = asset.duration
-        let value = CGFloat(duration.value)
-        let startTime = value * startTimeWidth / self.frameWidth
-        return CMTime(value: CMTimeValue(startTime), timescale: duration.timescale)
+        set {
+            guard let asset = self.asset else { return }
+            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * self.frameWidth
+            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = constant
+            self.updateTotalTime()
+            if let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
+                if constant > playTimeLineViewLeadingConstraint.constant {
+                    playTimeLineViewLeadingConstraint.constant = constant
+                    self.updatePlayTime()
+                }
+            }
+        }
+        get {
+            guard let asset = self.asset,
+                let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return .zero }
+            let startTimeWidth = leadingConstraint.constant
+            let duration = asset.duration
+            let value = CGFloat(duration.value)
+            let startTime = value * startTimeWidth / self.frameWidth
+            return CMTime(value: CMTimeValue(startTime), timescale: duration.timescale)
+        }
     }
 
     public var endTime: CMTime {
-        return CMTime(value: CMTimeValue(CGFloat(self.startTime.value) + CGFloat(self.durationTime.value)), timescale: self.startTime.timescale)
+        set {
+            let value = (CGFloat(newValue.value) * CGFloat(newValue.timescale)) - (CGFloat(self.startTime.value) * CGFloat(self.startTime.timescale))
+            self.durationTime = CMTime(value: CMTimeValue(value / CGFloat(newValue.timescale)), timescale: newValue.timescale)
+        }
+        get {
+            return CMTime(value: CMTimeValue(CGFloat(self.startTime.value) + CGFloat(self.durationTime.value)), timescale: self.startTime.timescale)
+        }
     }
 
     public var durationTime: CMTime {
-        guard let asset = self.asset,
-            let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
-            let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first else { return .zero }
-        let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(trilingConstraint.constant)
-        let duration = asset.duration
-        let value = CGFloat(duration.value)
-        let endTime = value * remainWidth / self.frameWidth
-        return CMTime(value: CMTimeValue(endTime), timescale: duration.timescale)
+        set {
+            guard let asset = self.asset,
+            let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return }
+            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * self.frameWidth
+            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(constant)
+            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant = -remainWidth
+            self.updateTotalTime()
+        }
+        get {
+            guard let asset = self.asset,
+                let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
+                let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first else { return .zero }
+            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(trilingConstraint.constant)
+            let duration = asset.duration
+            let value = CGFloat(duration.value)
+            let endTime = value * remainWidth / self.frameWidth
+            return CMTime(value: CMTimeValue(endTime), timescale: duration.timescale)
+        }
     }
 
     // asset

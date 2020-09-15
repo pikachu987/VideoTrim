@@ -105,7 +105,7 @@ class ViewController: UIViewController {
 
         self.permission { (alertController) in
             if alertController != nil {
-                self.showPublicBigBuckBunny()
+                self.showPublicVideo()
                 return
             }
             let fetchOptions = PHFetchOptions()
@@ -129,7 +129,7 @@ class ViewController: UIViewController {
                     }
                 }
             } else {
-                self.showPublicBigBuckBunny()
+                self.showPublicVideo()
             }
         }
     }
@@ -177,8 +177,8 @@ class ViewController: UIViewController {
         }
     }
 
-    private func showPublicBigBuckBunny() {
-        guard let url = URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4") else { return }
+    private func showPublicVideo() {
+        guard let url = URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4") else { return }
         print("Start Download")
         DispatchQueue.global().async {
             URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil).dataTask(with: url) { (data, response, error) in
@@ -218,9 +218,9 @@ class ViewController: UIViewController {
     }
 
     private func updateTrimTime() {
-        self.startTime = videoTrim.startTime
-        self.endTime = videoTrim.endTime
-        self.durationTime = videoTrim.durationTime
+        self.startTime = self.videoTrim.startTime
+        self.endTime = self.videoTrim.endTime
+        self.durationTime = self.videoTrim.durationTime
     }
 
     private func permission(_ handler: @escaping ((UIAlertController?) -> Void)) {
