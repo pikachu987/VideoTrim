@@ -66,6 +66,7 @@ videoTrim.currentTime = CMTime(value: 0, timescale: 0) // The frame bar position
 
 videoTrim.frameImageCount = 20 // Number of frame images
 videoTrim.trimReaminWidth = 50 // Video trim minimum length
+videoTrim.trimMaximumDuration = CMTime(value: CMTimeValue(6000), timescale: CMTimeScale(600)) // Video trim maximum Time
 
 videoTrim.topMargin = 4 // The top margin of the screen.
 videoTrim.bottomMargin = 8 // The bottom margin of the screen.

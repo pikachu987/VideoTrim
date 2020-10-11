@@ -40,6 +40,9 @@ open class VideoTrim: UIView {
     // Trim minimum length
     public var trimReaminWidth: CGFloat = 50
 
+    // Trim Maximum Duration
+    public var trimMaximumDuration: CMTime = .zero
+
     public var topMargin: CGFloat = 0 {
         didSet {
             self.constraints.filter({ $0.identifier == "timeLabelTop" }).first?.constant = self.topMargin
@@ -121,6 +124,7 @@ open class VideoTrim: UIView {
             self.bottomMargin = bottomMargin
         }
     }
+
     public var trimLineViewColor: CGColor = UIColor.white.cgColor {
         didSet {
             self.trimLineView.layer.borderColor = self.trimLineViewColor
@@ -230,9 +234,6 @@ open class VideoTrim: UIView {
                 self.trimStartTimeDimView.isHidden = true
                 self.trimEndTimeDimView.isHidden = true
             }
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant = 0
-            self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
 
             self.frameImages.forEach { (imageView) in
                 imageView.image = nil
@@ -278,6 +279,17 @@ open class VideoTrim: UIView {
                 self.timeLabel.text = 0.time
                 self.totalTimeLabel.text = totalTime.time
             }
+            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
+            if self.trimMaximumDuration == .zero {
+                self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant = 0
+            } else {
+                let duration = CGFloat(self.durationTime.value) / CGFloat(self.durationTime.timescale)
+                let maximumDuration = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+                if duration > maximumDuration {
+                    self.durationTime = self.trimMaximumDuration
+                }
+            }
+            self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
         }
     }
 
@@ -732,6 +744,27 @@ open class VideoTrim: UIView {
 
     @objc private func emptyAction(_ sender: Any?) { }
 
+    private func makeDuration(leading: CGFloat?, trailing: CGFloat?) -> CMTime? {
+        guard let asset = self.asset else { return nil }
+        var leadingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant
+        var trilingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant
+        if let leading = leading {
+            leadingConstant = leading
+        }
+        if let trailing = trailing {
+            trilingConstant = trailing
+        }
+        if let leadingConstant = leadingConstant, let trilingConstant = trilingConstant {
+            let remainWidth = self.frameWidth - abs(leadingConstant) - abs(trilingConstant)
+            let duration = asset.duration
+            let value = CGFloat(duration.value)
+            let endTime = value * remainWidth / self.frameWidth
+            return CMTime(value: CMTimeValue(endTime), timescale: duration.timescale)
+        } else {
+            return nil
+        }
+    }
+
     @objc private func trimStartTimeGesture(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
             self.delegate?.videoTrimStartTrimChange(self)
@@ -743,6 +776,13 @@ open class VideoTrim: UIView {
         let constant = point.x
         let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first
         let remainWidth = self.frameWidth - abs((trilingConstraint?.constant ?? 0))
+        if self.trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: constant < 0 ? 0 : constant, trailing: nil) {
+            let maximumTime = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+            let makeTime = CGFloat(makeDuration.value) / CGFloat(makeDuration.timescale)
+            if maximumTime < makeTime {
+                return
+            }
+        }
         if constant < 0 {
             leadingConstraint?.constant = 0
             self.updateTotalTime()
@@ -762,7 +802,7 @@ open class VideoTrim: UIView {
             }
         }
     }
-
+    
     @objc private func trimEndTimeGesture(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
             self.delegate?.videoTrimStartTrimChange(self)
@@ -774,11 +814,19 @@ open class VideoTrim: UIView {
         let constant = -(self.frameWidth - point.x)
         let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
         let remainWidth = self.frameWidth - abs((leadingConstraint?.constant ?? 0))
+
+        if self.trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: nil, trailing: constant > 0 ? 0 : constant) {
+            let maximumTime = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+            let makeTime = CGFloat(makeDuration.value) / CGFloat(makeDuration.timescale)
+            if maximumTime < makeTime {
+                return
+            }
+        }
         if constant > 0 {
             trilingConstraint?.constant = 0
             self.updateTotalTime()
             return
-        } else if(abs(constant) + self.trimLineWidth*2 + self.trimReaminWidth) > remainWidth {
+        } else if (abs(constant) + self.trimLineWidth*2 + self.trimReaminWidth) > remainWidth {
             return
         }
         trilingConstraint?.constant = constant
