@@ -428,7 +428,11 @@ open class VideoTrim: UIView {
     }()
 
     private var frameWidth: CGFloat {
-        return self.frameContainerView.bounds.width
+        if self.frameContainerView.bounds.width == 0 {
+            return 1
+        } else {
+            return self.frameContainerView.bounds.width
+        }
     }
 
     public override init(frame: CGRect) {
