@@ -94,7 +94,7 @@ open class VideoTrim: UIView {
             self.frameContainerView.constraints.filter({ $0.identifier == "frameViewTop" }).first?.constant = self.trimLineWidth
             self.frameContainerView.constraints.filter({ $0.identifier == "frameViewBottom" }).first?.constant = -self.trimLineWidth
             self.frameContainerView.constraints.filter({ $0.identifier == "trimLineViewLeading" }).first?.constant = -self.trimLineWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimLineViewTriling" }).first?.constant = self.trimLineWidth
+            self.frameContainerView.constraints.filter({ $0.identifier == "trimLineViewTrailing" }).first?.constant = self.trimLineWidth
 
             let leadingMargin = self.leadingMargin
             self.leadingMargin = leadingMargin
@@ -202,14 +202,14 @@ open class VideoTrim: UIView {
             let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return }
             let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * self.frameWidth
             let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(constant)
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant = -remainWidth
+            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = -remainWidth
             self.updateTotalTime()
         }
         get {
             guard let asset = self.asset,
                 let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
-                let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first else { return .zero }
-            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(trilingConstraint.constant)
+                let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return .zero }
+            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(trailingConstraint.constant)
             let duration = asset.duration
             let value = CGFloat(duration.value)
             let endTime = value * remainWidth / self.frameWidth
@@ -281,7 +281,7 @@ open class VideoTrim: UIView {
             }
             self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
             if self.trimMaximumDuration == .zero {
-                self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant = 0
+                self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = 0
             } else {
                 let duration = CGFloat(self.durationTime.value) / CGFloat(self.durationTime.timescale)
                 let maximumDuration = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
@@ -300,7 +300,7 @@ open class VideoTrim: UIView {
                 let current = self.currentTime,
                 let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
                 let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first,
-                let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first else { return }
+                let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return }
             let totalTime = CGFloat(asset.duration.value) / CGFloat(asset.duration.timescale)
             let currentTime = CGFloat(current.value) / CGFloat(current.timescale)
             let percentage = currentTime / totalTime
@@ -308,8 +308,8 @@ open class VideoTrim: UIView {
             if leading <= leadingConstraint.constant {
                 leading = leadingConstraint.constant
             }
-            if leading >= self.frameWidth - abs(trilingConstraint.constant) - self.playLineWidth {
-                leading = self.frameWidth - abs(trilingConstraint.constant) - self.playLineWidth
+            if leading >= self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth {
+                leading = self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth
             }
             playTimeLineViewLeadingConstraint.constant = leading
             self.updatePlayTime()
@@ -530,11 +530,11 @@ open class VideoTrim: UIView {
         // trimLineContainerView
         let trimContainerViewLeadingConstraint = NSLayoutConstraint(item: self.trimLineContainerView, attribute: .leading, relatedBy: .equal, toItem: self.frameContainerView, attribute: .leading, multiplier: 1, constant: 0)
         trimContainerViewLeadingConstraint.identifier = "trimContainerViewLeading"
-        let trimContainerViewTrilingConstraint = NSLayoutConstraint(item: self.trimLineContainerView, attribute: .trailing, relatedBy: .equal, toItem: self.frameContainerView, attribute: .trailing, multiplier: 1, constant: 0)
-        trimContainerViewTrilingConstraint.identifier = "trimContainerViewTriling"
+        let trimContainerViewTrailingConstraint = NSLayoutConstraint(item: self.trimLineContainerView, attribute: .trailing, relatedBy: .equal, toItem: self.frameContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        trimContainerViewTrailingConstraint.identifier = "trimContainerViewTrailing"
         self.frameContainerView.addConstraints([
             trimContainerViewLeadingConstraint,
-            trimContainerViewTrilingConstraint,
+            trimContainerViewTrailingConstraint,
             NSLayoutConstraint(item: self.trimLineContainerView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: self.trimLineContainerView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
@@ -542,11 +542,11 @@ open class VideoTrim: UIView {
         // trimLineView
         let trimLineViewLeadingConstraint = NSLayoutConstraint(item: self.trimLineView, attribute: .leading, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
         trimLineViewLeadingConstraint.identifier = "trimLineViewLeading"
-        let trimLineViewTrilingConstraint = NSLayoutConstraint(item: self.trimLineView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
-        trimLineViewTrilingConstraint.identifier = "trimLineViewTriling"
+        let trimLineViewTrailingConstraint = NSLayoutConstraint(item: self.trimLineView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        trimLineViewTrailingConstraint.identifier = "trimLineViewTrailing"
         self.frameContainerView.addConstraints([
             trimLineViewLeadingConstraint,
-            trimLineViewTrilingConstraint,
+            trimLineViewTrailingConstraint,
             NSLayoutConstraint(item: self.trimLineView, attribute: .top, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: self.trimLineView, attribute: .bottom, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
@@ -751,15 +751,15 @@ open class VideoTrim: UIView {
     private func makeDuration(leading: CGFloat?, trailing: CGFloat?) -> CMTime? {
         guard let asset = self.asset else { return nil }
         var leadingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant
-        var trilingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first?.constant
+        var trailingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant
         if let leading = leading {
             leadingConstant = leading
         }
         if let trailing = trailing {
-            trilingConstant = trailing
+            trailingConstant = trailing
         }
-        if let leadingConstant = leadingConstant, let trilingConstant = trilingConstant {
-            let remainWidth = self.frameWidth - abs(leadingConstant) - abs(trilingConstant)
+        if let leadingConstant = leadingConstant, let trailingConstant = trailingConstant {
+            let remainWidth = self.frameWidth - abs(leadingConstant) - abs(trailingConstant)
             let duration = asset.duration
             let value = CGFloat(duration.value)
             let endTime = value * remainWidth / self.frameWidth
@@ -778,8 +778,8 @@ open class VideoTrim: UIView {
         let point = sender.location(in: self.frameContainerView)
         let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
         let constant = point.x
-        let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first
-        let remainWidth = self.frameWidth - abs((trilingConstraint?.constant ?? 0))
+        let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
+        let remainWidth = self.frameWidth - abs((trailingConstraint?.constant ?? 0))
         if self.trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: constant < 0 ? 0 : constant, trailing: nil) {
             let maximumTime = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
             let makeTime = CGFloat(makeDuration.value) / CGFloat(makeDuration.timescale)
@@ -814,7 +814,7 @@ open class VideoTrim: UIView {
             self.delegate?.videoTrimEndTrimChange(self)
         }
         let point = sender.location(in: self.frameContainerView)
-        let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first
+        let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
         let constant = -(self.frameWidth - point.x)
         let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
         let remainWidth = self.frameWidth - abs((leadingConstraint?.constant ?? 0))
@@ -827,13 +827,13 @@ open class VideoTrim: UIView {
             }
         }
         if constant > 0 {
-            trilingConstraint?.constant = 0
+            trailingConstraint?.constant = 0
             self.updateTotalTime()
             return
         } else if (abs(constant) + self.trimLineWidth*2 + self.trimReaminWidth) > remainWidth {
             return
         }
-        trilingConstraint?.constant = constant
+        trailingConstraint?.constant = constant
         self.updateTotalTime()
         if let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
             if (self.frameWidth - abs(constant) - self.playLineWidth) < playTimeLineViewLeadingConstraint.constant {
@@ -854,14 +854,14 @@ open class VideoTrim: UIView {
             let point = sender.location(in: self.frameContainerView)
             let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first
             let constant = point.x
-            if let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first, let trilingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTriling" }).first {
+            if let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first, let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first {
                 if leadingConstraint.constant > constant {
                     playTimeLineViewLeadingConstraint?.constant = leadingConstraint.constant
                     self.updatePlayTime()
                     self.delegate?.videoTrimPlayTimeChange(self)
                     return
-                } else if constant > self.frameWidth - abs(trilingConstraint.constant) - self.playLineWidth {
-                    playTimeLineViewLeadingConstraint?.constant = self.frameWidth - abs(trilingConstraint.constant) - self.playLineWidth
+                } else if constant > self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth {
+                    playTimeLineViewLeadingConstraint?.constant = self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth
                     self.updatePlayTime()
                     self.delegate?.videoTrimPlayTimeChange(self)
                     return
