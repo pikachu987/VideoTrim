@@ -24,7 +24,7 @@ You can extract an image for each video frame as a video asset and set the start
 
 ## Requirements
 
-`VideoTrim` written in Swift 5.0. Compatible with iOS 8.0+
+`VideoTrim` written in Swift 5.0. Compatible with iOS 9.0+
 
 ## Installation
 
