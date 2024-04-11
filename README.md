@@ -93,6 +93,8 @@ videoTrim.timeFont = UIFont.systemFont(ofSize: 15) // time text font.
 videoTrim.startTime = CMTime(value: 600, timescale: 600) // CMTime of start time.
 videoTrim.endTime = CMTime(value: 1200, timescale: 600) // CMTime of end time.
 videoTrim.durationTime = CMTime(value: 1200, timescale: 600) // CMTime from start time to end time.
+videoTrim.isHiddenTime = false // Hidden Time Label.
+videoTrim.canTrimTime = true // Left & Right Gesture is Disabled
 
 ```
 

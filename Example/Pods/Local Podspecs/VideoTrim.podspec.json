@@ -1,8 +1,8 @@
 {
   "name": "VideoTrim",
-  "version": "0.1.0",
-  "summary": "A short description of VideoTrim.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.1.6",
+  "summary": "video trim setting",
+  "description": "You can extract an image for each video frame as a video asset and set the start time and end time.",
   "homepage": "https://github.com/pikachu987/VideoTrim",
   "license": {
     "type": "MIT",
@@ -13,10 +13,12 @@
   },
   "source": {
     "git": "https://github.com/pikachu987/VideoTrim.git",
-    "tag": "0.1.0"
+    "tag": "0.1.6"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
-  "source_files": "VideoTrim/Classes/**/*"
+  "source_files": "VideoTrim/Classes/**/*",
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
 }

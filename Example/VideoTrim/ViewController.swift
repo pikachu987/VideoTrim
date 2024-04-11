@@ -95,6 +95,8 @@ class ViewController: UIViewController {
         self.playerLayer.frame = self.playerContainerView.bounds
 
         self.videoTrim.delegate = self
+//        self.videoTrim.canTrimTime = false
+//        self.videoTrim.isHiddenTime = true
 
         self.playerContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.togglePlay(_:))))
 

@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04EF8062D3658D2254E7986EF37A35F7 /* Pods-VideoTrim_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F41FDDF674C5C715CB7822437BB4270 /* Pods-VideoTrim_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1399A6BC63147EF589DD744DE487657C /* Pods-VideoTrim_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA88D1B60D99D35947A30EFDE7758DCD /* Pods-VideoTrim_Tests-dummy.m */; };
-		189EB817250CC75900196698 /* VideoTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189EB816250CC75900196698 /* VideoTrim.swift */; };
-		189EB81B250CC7F200196698 /* VisualEffectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189EB81A250CC7F200196698 /* VisualEffectImageView.swift */; };
-		189EB81F250CC82D00196698 /* Int+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189EB81E250CC82D00196698 /* Int+Time.swift */; };
-		366B4A09D88B923D339481D4F108F903 /* Pods-VideoTrim_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4EAE8157D59B6BBEAF2687960EE90 /* Pods-VideoTrim_Example-dummy.m */; };
-		5C44E0F19606DF5CF6869166F453EBAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		8AC8A4F56FA4215D624DFB24B4441FB1 /* VideoTrim-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC34BA246CD3892D150EB88FEC056FE1 /* VideoTrim-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A4F06AE0A081A43962D5ADADDD2F096A /* VideoTrim-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D1A1A53FD3939B2BB6A6644D94EA2F /* VideoTrim-dummy.m */; };
-		CBBF42BEB32BCBF8D0EFD669F735962A /* Pods-VideoTrim_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4004D0CAC716D3F7CAA548B8A1BF72 /* Pods-VideoTrim_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DC770ED9E5CDCFCB10746D81D2C095E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		FA0FF8E8DA2FF951066F1F9773204585 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		018644CE54805CA44BB42EA2318AA146 /* Pods-VideoTrim_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F41FDDF674C5C715CB7822437BB4270 /* Pods-VideoTrim_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A004D9BDFA0784370D34930A793678C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		47E9D62D086D57831073579B1CA49991 /* Pods-VideoTrim_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4004D0CAC716D3F7CAA548B8A1BF72 /* Pods-VideoTrim_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88BD1B8D33F55E01F7D7B4C85877C7E6 /* VisualEffectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1DD5739DBAF23E012850A3184FBB0A /* VisualEffectImageView.swift */; };
+		A53E716A56E20E28F39EAB8AAD2F975D /* Pods-VideoTrim_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4EAE8157D59B6BBEAF2687960EE90 /* Pods-VideoTrim_Example-dummy.m */; };
+		A578FDF749832154918842C808F2ABAD /* VideoTrim-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F12D6C03A2D3C258208ECA541EB2445 /* VideoTrim-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B942EEDD112A7DB59F048D61EDEB3705 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		E1CA9E7E51B6C3056E30C0DF07BF7D7D /* Pods-VideoTrim_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA88D1B60D99D35947A30EFDE7758DCD /* Pods-VideoTrim_Tests-dummy.m */; };
+		E4A47A5221C722F71E99DD954E2DD9FE /* Int+Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F69704CB3166550FFB241FCF542184 /* Int+Time.swift */; };
+		F1EFD74A50FC151DCB62466E9AB0076A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		FB7CF626F9696E8ECDF4CED73A4CC4D5 /* VideoTrim-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB865897A49246B0D2D4E19B5A3D808 /* VideoTrim-dummy.m */; };
+		FD8361D737C65DF0CF5BE688D3B2F777 /* VideoTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A722E7AF0EBFD7CC7F7A55C044A1BB /* VideoTrim.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		286FE6F0681CC1AE2A8CD1A59FBFAFF4 /* PBXContainerItemProxy */ = {
+		6EF4E721BEF0A8BCD50DDEAA4AAB4C8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 901D7D609F83C426259CDBAD2B3A602A;
 			remoteInfo = VideoTrim;
 		};
-		8CA2E5600E7FBAB5B12E4F21F0991A81 /* PBXContainerItemProxy */ = {
+		AE6DBD49C5F2B8EC86FC057846F14225 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -39,71 +39,86 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		077038227ABA0FF773A849A90CD5083E /* VideoTrim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VideoTrim.debug.xcconfig; sourceTree = "<group>"; };
 		08C8D5F2D38E7E0CD3DBDABC41A84544 /* Pods-VideoTrim_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VideoTrim_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		0CA957CF00E896AAC0500EF0304DA560 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		136387F6509AC75A2C9A6B1B484FEA6F /* VideoTrim.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VideoTrim.modulemap; sourceTree = "<group>"; };
+		169DB4F775F3A688B71066EAE6497A31 /* VideoTrim-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VideoTrim-prefix.pch"; sourceTree = "<group>"; };
 		1705D7E925FC9EBE7D2EBEC741407074 /* Pods-VideoTrim_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VideoTrim_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		189AA6BBAE38729A02CB2ECDD5F4468B /* Pods-VideoTrim_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VideoTrim_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		189EB816250CC75900196698 /* VideoTrim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTrim.swift; path = VideoTrim/Classes/VideoTrim.swift; sourceTree = "<group>"; };
-		189EB81A250CC7F200196698 /* VisualEffectImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualEffectImageView.swift; path = VideoTrim/Classes/VisualEffectImageView.swift; sourceTree = "<group>"; };
-		189EB81E250CC82D00196698 /* Int+Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Int+Time.swift"; path = "VideoTrim/Classes/Int+Time.swift"; sourceTree = "<group>"; };
 		24BA82E3E1DD3DA59CE508A43CB75C21 /* Pods-VideoTrim_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VideoTrim_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		2D2486B026DBE02A3206319ACDF1D9E3 /* Pods-VideoTrim_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VideoTrim_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3F41FDDF674C5C715CB7822437BB4270 /* Pods-VideoTrim_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VideoTrim_Example-umbrella.h"; sourceTree = "<group>"; };
 		4983FCBFF09686AFE024A34BE490F223 /* Pods-VideoTrim_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VideoTrim_Example.modulemap"; sourceTree = "<group>"; };
 		4FF2A042BDB70D82B90C78000A46870F /* Pods-VideoTrim_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VideoTrim_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		51D005A1172B22A2844B3137555E4E13 /* Pods_VideoTrim_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoTrim_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FC80868AC36C8B9F35E17BB4038D0D8 /* VideoTrim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VideoTrim.debug.xcconfig; sourceTree = "<group>"; };
-		73A7148F69F656C6A4320F7E16E544C3 /* VideoTrim-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VideoTrim-prefix.pch"; sourceTree = "<group>"; };
+		51D005A1172B22A2844B3137555E4E13 /* Pods-VideoTrim_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-VideoTrim_Example"; path = Pods_VideoTrim_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F12D6C03A2D3C258208ECA541EB2445 /* VideoTrim-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VideoTrim-umbrella.h"; sourceTree = "<group>"; };
+		70F69704CB3166550FFB241FCF542184 /* Int+Time.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Int+Time.swift"; path = "VideoTrim/Classes/Int+Time.swift"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7B4004D0CAC716D3F7CAA548B8A1BF72 /* Pods-VideoTrim_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VideoTrim_Tests-umbrella.h"; sourceTree = "<group>"; };
-		82C98477B353EA116EE39EDD3A29D9E3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8B43F3FE57994F902993BEFEF3129A69 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		8F1F846117F516BB73FB40BC498756ED /* Pods-VideoTrim_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VideoTrim_Example-Info.plist"; sourceTree = "<group>"; };
-		936B3FF3E170D4819B39E309008C10A2 /* VideoTrim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VideoTrim.release.xcconfig; sourceTree = "<group>"; };
+		97A722E7AF0EBFD7CC7F7A55C044A1BB /* VideoTrim.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoTrim.swift; path = VideoTrim/Classes/VideoTrim.swift; sourceTree = "<group>"; };
 		9CC4EAE8157D59B6BBEAF2687960EE90 /* Pods-VideoTrim_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VideoTrim_Example-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A6A1924B471E4D134F6106E85CD77A02 /* Pods-VideoTrim_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VideoTrim_Tests.modulemap"; sourceTree = "<group>"; };
-		ACC9CF1F78166C2BD705110FEDE3E66C /* VideoTrim.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = VideoTrim.modulemap; sourceTree = "<group>"; };
-		B43D782C4776344326D1ED63D2A6CDA1 /* Pods_VideoTrim_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoTrim_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD244FB9408CECC538F14600D2FDED75 /* VideoTrim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = VideoTrim.release.xcconfig; sourceTree = "<group>"; };
+		ADB865897A49246B0D2D4E19B5A3D808 /* VideoTrim-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VideoTrim-dummy.m"; sourceTree = "<group>"; };
+		B43D782C4776344326D1ED63D2A6CDA1 /* Pods-VideoTrim_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-VideoTrim_Tests"; path = Pods_VideoTrim_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5CE8D5FE958B95BAAE4ADC4AC52693B /* Pods-VideoTrim_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VideoTrim_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B8EA98B1A56FD7F3E1A44646F97106AC /* Pods-VideoTrim_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VideoTrim_Example-frameworks.sh"; sourceTree = "<group>"; };
-		BC217C75323C2707FFF054B26DB380ED /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CA35BF4CDE5653FD21341C6AC0CE9410 /* VideoTrim-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "VideoTrim-Info.plist"; sourceTree = "<group>"; };
+		BF158C73BE8B320556D3A30DCC2EFFBC /* VideoTrim-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "VideoTrim-Info.plist"; sourceTree = "<group>"; };
 		CA88D1B60D99D35947A30EFDE7758DCD /* Pods-VideoTrim_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VideoTrim_Tests-dummy.m"; sourceTree = "<group>"; };
+		CF625BBE2F131560C07227532C26F9F8 /* VideoTrim.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = VideoTrim.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D159A9888E35F3FB0CF8B64DA6349917 /* Pods-VideoTrim_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VideoTrim_Tests-Info.plist"; sourceTree = "<group>"; };
-		D5E1F63496BAAF7A08652EF86E56EC70 /* VideoTrim.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = VideoTrim.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D8BAB1D1C98789164FA8197F4A96549A /* Pods-VideoTrim_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VideoTrim_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F7D1A1A53FD3939B2BB6A6644D94EA2F /* VideoTrim-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "VideoTrim-dummy.m"; sourceTree = "<group>"; };
-		FC34BA246CD3892D150EB88FEC056FE1 /* VideoTrim-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "VideoTrim-umbrella.h"; sourceTree = "<group>"; };
-		FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VideoTrim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF1DD5739DBAF23E012850A3184FBB0A /* VisualEffectImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VisualEffectImageView.swift; path = VideoTrim/Classes/VisualEffectImageView.swift; sourceTree = "<group>"; };
+		FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = VideoTrim; path = VideoTrim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1E8CC694DDCA0C3630CDFC2FEE7CD12C /* Frameworks */ = {
+		2A4BCBCD5D3CDD4ACFD3E193315AC131 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA0FF8E8DA2FF951066F1F9773204585 /* Foundation.framework in Frameworks */,
+				F1EFD74A50FC151DCB62466E9AB0076A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DB36DE672F26F33F47E621C28A563864 /* Frameworks */ = {
+		5F71442ED0DAC26D659F8D7F43C07977 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C44E0F19606DF5CF6869166F453EBAA /* Foundation.framework in Frameworks */,
+				B942EEDD112A7DB59F048D61EDEB3705 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F50FA09266681736A1971AC9534095AE /* Frameworks */ = {
+		B508B082D89A272FE7CC3794181A4B9E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC770ED9E5CDCFCB10746D81D2C095E3 /* Foundation.framework in Frameworks */,
+				2A004D9BDFA0784370D34930A793678C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11DC6B8ACCBB4CABCF4C95B24A24242F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				136387F6509AC75A2C9A6B1B484FEA6F /* VideoTrim.modulemap */,
+				ADB865897A49246B0D2D4E19B5A3D808 /* VideoTrim-dummy.m */,
+				BF158C73BE8B320556D3A30DCC2EFFBC /* VideoTrim-Info.plist */,
+				169DB4F775F3A688B71066EAE6497A31 /* VideoTrim-prefix.pch */,
+				6F12D6C03A2D3C258208ECA541EB2445 /* VideoTrim-umbrella.h */,
+				077038227ABA0FF773A849A90CD5083E /* VideoTrim.debug.xcconfig */,
+				AD244FB9408CECC538F14600D2FDED75 /* VideoTrim.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/VideoTrim";
+			sourceTree = "<group>";
+		};
 		19D3D523511EE03A1308014843A116EC /* Pods-VideoTrim_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,29 +136,22 @@
 			path = "Target Support Files/Pods-VideoTrim_Example";
 			sourceTree = "<group>";
 		};
-		31126BDD85C98CB6E4F475D4593425C6 /* Products */ = {
+		340DB3B652B9F563B4D040E637CB3C0C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				51D005A1172B22A2844B3137555E4E13 /* Pods_VideoTrim_Example.framework */,
-				B43D782C4776344326D1ED63D2A6CDA1 /* Pods_VideoTrim_Tests.framework */,
-				FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim.framework */,
+				51D005A1172B22A2844B3137555E4E13 /* Pods-VideoTrim_Example */,
+				B43D782C4776344326D1ED63D2A6CDA1 /* Pods-VideoTrim_Tests */,
+				FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		54D1C92D54A0069BC648F3E45346E55F /* Support Files */ = {
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				ACC9CF1F78166C2BD705110FEDE3E66C /* VideoTrim.modulemap */,
-				F7D1A1A53FD3939B2BB6A6644D94EA2F /* VideoTrim-dummy.m */,
-				CA35BF4CDE5653FD21341C6AC0CE9410 /* VideoTrim-Info.plist */,
-				73A7148F69F656C6A4320F7E16E544C3 /* VideoTrim-prefix.pch */,
-				FC34BA246CD3892D150EB88FEC056FE1 /* VideoTrim-umbrella.h */,
-				5FC80868AC36C8B9F35E17BB4038D0D8 /* VideoTrim.debug.xcconfig */,
-				936B3FF3E170D4819B39E309008C10A2 /* VideoTrim.release.xcconfig */,
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/VideoTrim";
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		5C2D5EB24842C1AA7C32EC4EDECEBD3F /* Targets Support Files */ = {
@@ -155,30 +163,17 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		6DB787D0CA073AD199A1676E0C1D98A1 /* Development Pods */ = {
+		6FF1D15EAF40A4D59D0394560C8D8135 /* VideoTrim */ = {
 			isa = PBXGroup;
 			children = (
-				D56FD7BF0D6B5BE5F4857D094A1E4082 /* VideoTrim */,
+				70F69704CB3166550FFB241FCF542184 /* Int+Time.swift */,
+				97A722E7AF0EBFD7CC7F7A55C044A1BB /* VideoTrim.swift */,
+				EF1DD5739DBAF23E012850A3184FBB0A /* VisualEffectImageView.swift */,
+				F89B5FA4C3E1899135A2DDB231539CC1 /* Pod */,
+				11DC6B8ACCBB4CABCF4C95B24A24242F /* Support Files */,
 			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		7468CA3FCD302851537BE9BA310CE7A9 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				BC217C75323C2707FFF054B26DB380ED /* LICENSE */,
-				82C98477B353EA116EE39EDD3A29D9E3 /* README.md */,
-				D5E1F63496BAAF7A08652EF86E56EC70 /* VideoTrim.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
-			);
-			name = iOS;
+			name = VideoTrim;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		C546E3CB34A7B1203929574F535CD88C /* Pods-VideoTrim_Tests */ = {
@@ -201,9 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				6DB787D0CA073AD199A1676E0C1D98A1 /* Development Pods */,
+				E271F07CF1D9C279354120E8D7DA9C13 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				31126BDD85C98CB6E4F475D4593425C6 /* Products */,
+				340DB3B652B9F563B4D040E637CB3C0C /* Products */,
 				5C2D5EB24842C1AA7C32EC4EDECEBD3F /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -211,48 +206,53 @@
 		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D56FD7BF0D6B5BE5F4857D094A1E4082 /* VideoTrim */ = {
+		E271F07CF1D9C279354120E8D7DA9C13 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				189EB816250CC75900196698 /* VideoTrim.swift */,
-				189EB81A250CC7F200196698 /* VisualEffectImageView.swift */,
-				189EB81E250CC82D00196698 /* Int+Time.swift */,
-				7468CA3FCD302851537BE9BA310CE7A9 /* Pod */,
-				54D1C92D54A0069BC648F3E45346E55F /* Support Files */,
+				6FF1D15EAF40A4D59D0394560C8D8135 /* VideoTrim */,
 			);
-			name = VideoTrim;
-			path = ../..;
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		F89B5FA4C3E1899135A2DDB231539CC1 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				8B43F3FE57994F902993BEFEF3129A69 /* LICENSE */,
+				0CA957CF00E896AAC0500EF0304DA560 /* README.md */,
+				CF625BBE2F131560C07227532C26F9F8 /* VideoTrim.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1F82F4B29BDC0272C3E157AAE011D876 /* Headers */ = {
+		0B4A0195F5E750D76A52D0291D1941A4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBBF42BEB32BCBF8D0EFD669F735962A /* Pods-VideoTrim_Tests-umbrella.h in Headers */,
+				018644CE54805CA44BB42EA2318AA146 /* Pods-VideoTrim_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87D9E2B497F45C8AD329DB0B4A73160F /* Headers */ = {
+		B9F3483FD6E28A0B5EF61481735B08D3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AC8A4F56FA4215D624DFB24B4441FB1 /* VideoTrim-umbrella.h in Headers */,
+				47E9D62D086D57831073579B1CA49991 /* Pods-VideoTrim_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D21A53B9937174C3FDDAE09E3517EFA0 /* Headers */ = {
+		FD38D9445708E77872F0D7AD9665BE37 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04EF8062D3658D2254E7986EF37A35F7 /* Pods-VideoTrim_Example-umbrella.h in Headers */,
+				A578FDF749832154918842C808F2ABAD /* VideoTrim-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,31 +261,31 @@
 /* Begin PBXNativeTarget section */
 		624F710B916EC8948F23A26BF74EA13A /* Pods-VideoTrim_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 67AF8FA77A2ED49E29B3D8276E7C6DEC /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Example" */;
+			buildConfigurationList = 44C2343CE886E2BEFD83658A4708DEE3 /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Example" */;
 			buildPhases = (
-				D21A53B9937174C3FDDAE09E3517EFA0 /* Headers */,
-				D4CD3F5077B20C1F092E43A9E0A75CB7 /* Sources */,
-				F50FA09266681736A1971AC9534095AE /* Frameworks */,
-				3958D8FCA010FFCED3B42BD288C70487 /* Resources */,
+				0B4A0195F5E750D76A52D0291D1941A4 /* Headers */,
+				960FA2665FFB7BC2F7F3AF421D7E237D /* Sources */,
+				B508B082D89A272FE7CC3794181A4B9E /* Frameworks */,
+				3E6521C269497A7557CE790F0D54CCA8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EDB6C376C3CAA446CDE67C02629FC0C8 /* PBXTargetDependency */,
+				C38CC13C08FA81388D7DBCE2E8252881 /* PBXTargetDependency */,
 			);
 			name = "Pods-VideoTrim_Example";
-			productName = "Pods-VideoTrim_Example";
-			productReference = 51D005A1172B22A2844B3137555E4E13 /* Pods_VideoTrim_Example.framework */;
+			productName = Pods_VideoTrim_Example;
+			productReference = 51D005A1172B22A2844B3137555E4E13 /* Pods-VideoTrim_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 		901D7D609F83C426259CDBAD2B3A602A /* VideoTrim */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6640739D867D10162273E017BEC4DAC3 /* Build configuration list for PBXNativeTarget "VideoTrim" */;
+			buildConfigurationList = CA666E3A3A5F3037D52F638F93878763 /* Build configuration list for PBXNativeTarget "VideoTrim" */;
 			buildPhases = (
-				87D9E2B497F45C8AD329DB0B4A73160F /* Headers */,
-				3651090EC1571FB31BE9DC4947B124E6 /* Sources */,
-				1E8CC694DDCA0C3630CDFC2FEE7CD12C /* Frameworks */,
-				06DC0F43ACB6338D41EB4DFB49F51411 /* Resources */,
+				FD38D9445708E77872F0D7AD9665BE37 /* Headers */,
+				B48898FFE3D09CF61D1581444BCFFB24 /* Sources */,
+				2A4BCBCD5D3CDD4ACFD3E193315AC131 /* Frameworks */,
+				67C97788A9B148AAD0B5D0895AD98CA1 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -293,26 +293,26 @@
 			);
 			name = VideoTrim;
 			productName = VideoTrim;
-			productReference = FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim.framework */;
+			productReference = FFFABD6A64B21675A1548E1DCF7C2C85 /* VideoTrim */;
 			productType = "com.apple.product-type.framework";
 		};
 		D779185FDBA9B83DF41C9AC03F7BA9F1 /* Pods-VideoTrim_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D54896081BEDD060FCDFA1A9D61925B /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Tests" */;
+			buildConfigurationList = BC964B4C8B330DDC4B06F0C9057BBA1B /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Tests" */;
 			buildPhases = (
-				1F82F4B29BDC0272C3E157AAE011D876 /* Headers */,
-				0C69D394E9AC1054C87CCE0868F91E38 /* Sources */,
-				DB36DE672F26F33F47E621C28A563864 /* Frameworks */,
-				3A76C2AD490A32D58D80ECBDA4D96887 /* Resources */,
+				B9F3483FD6E28A0B5EF61481735B08D3 /* Headers */,
+				867106F06920C547DB961A4B01E61283 /* Sources */,
+				5F71442ED0DAC26D659F8D7F43C07977 /* Frameworks */,
+				CE0072E07ABD5FE54D6F67BE2C738CEB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				26495AE233EBCB9EB0E281389D57357D /* PBXTargetDependency */,
+				2F25A3C86C60C2C0130D15E8366DB351 /* PBXTargetDependency */,
 			);
 			name = "Pods-VideoTrim_Tests";
-			productName = "Pods-VideoTrim_Tests";
-			productReference = B43D782C4776344326D1ED63D2A6CDA1 /* Pods_VideoTrim_Tests.framework */;
+			productName = Pods_VideoTrim_Tests;
+			productReference = B43D782C4776344326D1ED63D2A6CDA1 /* Pods-VideoTrim_Tests */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -321,24 +321,19 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
-				TargetAttributes = {
-					901D7D609F83C426259CDBAD2B3A602A = {
-						LastSwiftMigration = 1170;
-					};
-				};
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 31126BDD85C98CB6E4F475D4593425C6 /* Products */;
+			productRefGroup = 340DB3B652B9F563B4D040E637CB3C0C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -350,21 +345,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		06DC0F43ACB6338D41EB4DFB49F51411 /* Resources */ = {
+		3E6521C269497A7557CE790F0D54CCA8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3958D8FCA010FFCED3B42BD288C70487 /* Resources */ = {
+		67C97788A9B148AAD0B5D0895AD98CA1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A76C2AD490A32D58D80ECBDA4D96887 /* Resources */ = {
+		CE0072E07ABD5FE54D6F67BE2C738CEB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -374,52 +369,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0C69D394E9AC1054C87CCE0868F91E38 /* Sources */ = {
+		867106F06920C547DB961A4B01E61283 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1399A6BC63147EF589DD744DE487657C /* Pods-VideoTrim_Tests-dummy.m in Sources */,
+				E1CA9E7E51B6C3056E30C0DF07BF7D7D /* Pods-VideoTrim_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3651090EC1571FB31BE9DC4947B124E6 /* Sources */ = {
+		960FA2665FFB7BC2F7F3AF421D7E237D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4F06AE0A081A43962D5ADADDD2F096A /* VideoTrim-dummy.m in Sources */,
-				189EB81B250CC7F200196698 /* VisualEffectImageView.swift in Sources */,
-				189EB81F250CC82D00196698 /* Int+Time.swift in Sources */,
-				189EB817250CC75900196698 /* VideoTrim.swift in Sources */,
+				A53E716A56E20E28F39EAB8AAD2F975D /* Pods-VideoTrim_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4CD3F5077B20C1F092E43A9E0A75CB7 /* Sources */ = {
+		B48898FFE3D09CF61D1581444BCFFB24 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366B4A09D88B923D339481D4F108F903 /* Pods-VideoTrim_Example-dummy.m in Sources */,
+				E4A47A5221C722F71E99DD954E2DD9FE /* Int+Time.swift in Sources */,
+				FD8361D737C65DF0CF5BE688D3B2F777 /* VideoTrim.swift in Sources */,
+				FB7CF626F9696E8ECDF4CED73A4CC4D5 /* VideoTrim-dummy.m in Sources */,
+				88BD1B8D33F55E01F7D7B4C85877C7E6 /* VisualEffectImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		26495AE233EBCB9EB0E281389D57357D /* PBXTargetDependency */ = {
+		2F25A3C86C60C2C0130D15E8366DB351 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-VideoTrim_Example";
 			target = 624F710B916EC8948F23A26BF74EA13A /* Pods-VideoTrim_Example */;
-			targetProxy = 8CA2E5600E7FBAB5B12E4F21F0991A81 /* PBXContainerItemProxy */;
+			targetProxy = AE6DBD49C5F2B8EC86FC057846F14225 /* PBXContainerItemProxy */;
 		};
-		EDB6C376C3CAA446CDE67C02629FC0C8 /* PBXTargetDependency */ = {
+		C38CC13C08FA81388D7DBCE2E8252881 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VideoTrim;
 			target = 901D7D609F83C426259CDBAD2B3A602A /* VideoTrim */;
-			targetProxy = 286FE6F0681CC1AE2A8CD1A59FBFAFF4 /* PBXContainerItemProxy */;
+			targetProxy = 6EF4E721BEF0A8BCD50DDEAA4AAB4C8E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		264A9F638BB029C9415E7128794E01AD /* Release */ = {
+		431BA2B8298F0EE71735B9E0114E1955 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -446,6 +441,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -468,21 +464,114 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		31059FC4CDCFE28D42E245A795B024B8 /* Debug */ = {
+		4FADBE6400DA3C65465BE62BC6C52BD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D2486B026DBE02A3206319ACDF1D9E3 /* Pods-VideoTrim_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5F86464DED57C99C5702329AB5ADCFB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 077038227ABA0FF773A849A90CD5083E /* VideoTrim.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/VideoTrim/VideoTrim-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/VideoTrim/VideoTrim-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/VideoTrim/VideoTrim.modulemap";
+				PRODUCT_MODULE_NAME = VideoTrim;
+				PRODUCT_NAME = VideoTrim;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		66125B23D1565C0CE5816B2438867350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5CE8D5FE958B95BAAE4ADC4AC52693B /* Pods-VideoTrim_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		79759604D78320E712558F49DF19AA9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -509,6 +598,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -534,8 +624,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -545,118 +634,14 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		3956B526CAC951ED49246034C02A3E8E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5CE8D5FE958B95BAAE4ADC4AC52693B /* Pods-VideoTrim_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		695AE6CBC4B753BB1838C312A4C2BD0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FC80868AC36C8B9F35E17BB4038D0D8 /* VideoTrim.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/VideoTrim/VideoTrim-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/VideoTrim/VideoTrim-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 0.1.5;
-				MODULEMAP_FILE = "Target Support Files/VideoTrim/VideoTrim.modulemap";
-				PRODUCT_MODULE_NAME = VideoTrim;
-				PRODUCT_NAME = VideoTrim;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7141E99DD83B2AD5633990F76D17219A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D2486B026DBE02A3206319ACDF1D9E3 /* Pods-VideoTrim_Example.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Example/Pods-VideoTrim_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		72715599E52AED4381FF15286584768F /* Debug */ = {
+		79C0AA0C11D4C4D9004F363A0D838E7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08C8D5F2D38E7E0CD3DBDABC41A84544 /* Pods-VideoTrim_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -667,7 +652,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests.modulemap";
@@ -684,12 +669,43 @@
 			};
 			name = Debug;
 		};
-		A880D4266F0A4C018DB426D841C1FDE6 /* Release */ = {
+		7ECE54E79956A02B9D2038355D6F2A2A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 936B3FF3E170D4819B39E309008C10A2 /* VideoTrim.release.xcconfig */;
+			baseConfigurationReference = 24BA82E3E1DD3DA59CE508A43CB75C21 /* Pods-VideoTrim_Tests.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F5DAA98906A68C14B12925BFE1D9D0EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD244FB9408CECC538F14600D2FDED75 /* VideoTrim.release.xcconfig */;
+			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -703,7 +719,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 0.1.5;
 				MODULEMAP_FILE = "Target Support Files/VideoTrim/VideoTrim.modulemap";
 				PRODUCT_MODULE_NAME = VideoTrim;
 				PRODUCT_NAME = VideoTrim;
@@ -711,40 +726,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F1D77EDEEA69D40C6F38B1F1A7A5F86B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24BA82E3E1DD3DA59CE508A43CB75C21 /* Pods-VideoTrim_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-VideoTrim_Tests/Pods-VideoTrim_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -755,11 +736,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D54896081BEDD060FCDFA1A9D61925B /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Tests" */ = {
+		44C2343CE886E2BEFD83658A4708DEE3 /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72715599E52AED4381FF15286584768F /* Debug */,
-				F1D77EDEEA69D40C6F38B1F1A7A5F86B /* Release */,
+				66125B23D1565C0CE5816B2438867350 /* Debug */,
+				4FADBE6400DA3C65465BE62BC6C52BD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -767,26 +748,26 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31059FC4CDCFE28D42E245A795B024B8 /* Debug */,
-				264A9F638BB029C9415E7128794E01AD /* Release */,
+				79759604D78320E712558F49DF19AA9F /* Debug */,
+				431BA2B8298F0EE71735B9E0114E1955 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6640739D867D10162273E017BEC4DAC3 /* Build configuration list for PBXNativeTarget "VideoTrim" */ = {
+		BC964B4C8B330DDC4B06F0C9057BBA1B /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				695AE6CBC4B753BB1838C312A4C2BD0E /* Debug */,
-				A880D4266F0A4C018DB426D841C1FDE6 /* Release */,
+				79C0AA0C11D4C4D9004F363A0D838E7F /* Debug */,
+				7ECE54E79956A02B9D2038355D6F2A2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		67AF8FA77A2ED49E29B3D8276E7C6DEC /* Build configuration list for PBXNativeTarget "Pods-VideoTrim_Example" */ = {
+		CA666E3A3A5F3037D52F638F93878763 /* Build configuration list for PBXNativeTarget "VideoTrim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3956B526CAC951ED49246034C02A3E8E /* Debug */,
-				7141E99DD83B2AD5633990F76D17219A /* Release */,
+				5F86464DED57C99C5702329AB5ADCFB6 /* Debug */,
+				F5DAA98906A68C14B12925BFE1D9D0EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

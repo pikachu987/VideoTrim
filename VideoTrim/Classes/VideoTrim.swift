@@ -24,7 +24,7 @@ import UIKit
 import AVKit
 
 // MARK: VideoTrimDelegate
-public protocol VideoTrimDelegate: class {
+public protocol VideoTrimDelegate: AnyObject {
     func videoTrimStartTrimChange(_ videoTrim: VideoTrim)
     func videoTrimEndTrimChange(_ videoTrim: VideoTrim)
     func videoTrimPlayTimeChange(_ videoTrim: VideoTrim)
@@ -45,56 +45,56 @@ open class VideoTrim: UIView {
 
     public var topMargin: CGFloat = 0 {
         didSet {
-            self.constraints.filter({ $0.identifier == "timeLabelTop" }).first?.constant = self.topMargin
+            constraints.filter({ $0.identifier == "stackViewTop" }).first?.constant = topMargin
         }
     }
 
     public var bottomMargin: CGFloat = 0 {
         didSet {
-            self.constraints.filter({ $0.identifier == "frameContainerViewBottom" }).first?.constant = -self.bottomMargin - self.playLineVerticalSize
+            constraints.filter({ $0.identifier == "stackViewBottom" }).first?.constant = -bottomMargin - playLineVerticalSize
         }
     }
 
     public var leadingMargin: CGFloat = 14 {
         didSet {
-            let constant = self.leadingMargin + self.trimLineWidth
-            self.constraints.filter({ $0.identifier == "frameContainerViewLeading" }).first?.constant = constant
+            let constant = leadingMargin + trimLineWidth
+            constraints.filter({ $0.identifier == "stackViewLeading" }).first?.constant = constant
         }
     }
 
     public var trailingMargin: CGFloat = 14 {
         didSet {
-            let constant = self.trailingMargin + self.trimLineWidth
-            self.constraints.filter({ $0.identifier == "frameContainerViewTrailing" }).first?.constant = -constant
+            let constant = trailingMargin + trimLineWidth
+            constraints.filter({ $0.identifier == "stackViewTrailing" }).first?.constant = -constant
         }
     }
 
     public var frameHeight: CGFloat = 48 {
         didSet {
-            self.frameContainerView.constraints.filter({ $0.identifier == "frameContainerViewHeight" }).first?.constant = self.frameHeight
+            frameContainerView.constraints.filter({ $0.identifier == "frameContainerViewHeight" }).first?.constant = frameHeight
         }
     }
 
     public var trimMaskDimViewColor: UIColor = UIColor(white: 0/255, alpha: 0.7) {
         didSet {
-            self.trimStartTimeDimView.backgroundColor = self.trimMaskDimViewColor
-            self.trimEndTimeDimView.backgroundColor = self.trimMaskDimViewColor
+            trimStartTimeDimView.backgroundColor = trimMaskDimViewColor
+            trimEndTimeDimView.backgroundColor = trimMaskDimViewColor
         }
     }
 
     public var trimLineRadius: CGFloat = 4 {
         didSet {
-            self.trimLineView.layer.cornerRadius = self.trimLineRadius
+            trimLineView.layer.cornerRadius = trimLineRadius
         }
     }
 
     public var trimLineWidth: CGFloat = 4 {
         didSet {
-            self.trimLineView.layer.borderWidth = self.trimLineWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "frameViewTop" }).first?.constant = self.trimLineWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "frameViewBottom" }).first?.constant = -self.trimLineWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimLineViewLeading" }).first?.constant = -self.trimLineWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimLineViewTrailing" }).first?.constant = self.trimLineWidth
+            trimLineView.layer.borderWidth = trimLineWidth
+            frameContainerView.constraints.filter({ $0.identifier == "frameViewTop" }).first?.constant = trimLineWidth
+            frameContainerView.constraints.filter({ $0.identifier == "frameViewBottom" }).first?.constant = -trimLineWidth
+            frameContainerView.constraints.filter({ $0.identifier == "trimLineViewLeading" }).first?.constant = -trimLineWidth
+            frameContainerView.constraints.filter({ $0.identifier == "trimLineViewTrailing" }).first?.constant = trimLineWidth
 
             let leadingMargin = self.leadingMargin
             self.leadingMargin = leadingMargin
@@ -106,20 +106,20 @@ open class VideoTrim: UIView {
 
     public var playLineRadius: CGFloat = 3 {
         didSet {
-            self.playTimeLineView.layer.cornerRadius = self.playLineRadius
+            playTimeLineView.layer.cornerRadius = playLineRadius
         }
     }
 
     public var playLineWidth: CGFloat = 6 {
         didSet {
-            self.playTimeLineView.constraints.filter({ $0.identifier == "playTimeLineViewWidth" }).first?.constant = self.playLineWidth
+            playTimeLineView.constraints.filter({ $0.identifier == "playTimeLineViewWidth" }).first?.constant = playLineWidth
         }
     }
 
     public var playLineVerticalSize: CGFloat = 4 {
         didSet {
-            self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewTop" }).first?.constant = -self.playLineVerticalSize
-            self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewBottom" }).first?.constant = self.playLineVerticalSize
+            frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewTop" }).first?.constant = -playLineVerticalSize
+            frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewBottom" }).first?.constant = playLineVerticalSize
             let bottomMargin = self.bottomMargin
             self.bottomMargin = bottomMargin
         }
@@ -127,119 +127,134 @@ open class VideoTrim: UIView {
 
     public var trimLineViewColor: CGColor = UIColor.white.cgColor {
         didSet {
-            self.trimLineView.layer.borderColor = self.trimLineViewColor
+            trimLineView.layer.borderColor = trimLineViewColor
         }
     }
 
     public var playTimeLineViewColor: UIColor = UIColor.white {
         didSet {
-            self.playTimeLineView.backgroundColor = self.playTimeLineViewColor
+            playTimeLineView.backgroundColor = playTimeLineViewColor
+        }
+    }
+
+    public var isHiddenTime: Bool = false {
+        didSet {
+            if isHiddenTime {
+                timeContainerView.isHidden = true
+            }
         }
     }
 
     public var timeColor: UIColor = UIColor.white {
         didSet {
-            self.timeLabel.textColor = self.timeColor
-            self.totalTimeLabel.textColor = self.timeColor
+            timeLabel.textColor = timeColor
+            totalTimeLabel.textColor = timeColor
         }
     }
 
     public var timeFont: UIFont = UIFont.systemFont(ofSize: 15) {
         didSet {
-            self.timeLabel.font = self.timeFont
-            self.totalTimeLabel.font = self.timeFont
+            timeLabel.font = timeFont
+            totalTimeLabel.font = timeFont
         }
     }
 
     public var playTime: CMTime {
-        guard let asset = self.asset,
-            let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
-            let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first else { return .zero }
+        guard let asset = asset,
+            let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
+            let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first else { return .zero }
         let playTimeWidth = playTimeLineViewLeadingConstraint.constant - leadingConstraint.constant
         let duration = asset.duration
         let value = CGFloat(duration.value)
-        let playTime = value * playTimeWidth / self.frameWidth
+        let playTime = value * playTimeWidth / frameWidth
         return CMTime(value: CMTimeValue(playTime), timescale: duration.timescale)
     }
 
     public var startTime: CMTime {
         set {
-            guard let asset = self.asset else { return }
-            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * self.frameWidth
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = constant
-            self.updateTotalTime()
-            if let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
+            guard let asset = asset else { return }
+            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * frameWidth
+            frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = constant
+            updateTotalTime()
+            if let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
                 if constant > playTimeLineViewLeadingConstraint.constant {
                     playTimeLineViewLeadingConstraint.constant = constant
-                    self.updatePlayTime()
+                    updatePlayTime()
                 }
             }
         }
         get {
-            guard let asset = self.asset,
-                let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return .zero }
+            guard let asset = asset,
+                let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return .zero }
             let startTimeWidth = leadingConstraint.constant
             let duration = asset.duration
             let value = CGFloat(duration.value)
-            let startTime = value * startTimeWidth / self.frameWidth
+            let startTime = value * startTimeWidth / frameWidth
             return CMTime(value: CMTimeValue(startTime), timescale: duration.timescale)
         }
     }
 
     public var endTime: CMTime {
         set {
-            let value = (CGFloat(newValue.value) * CGFloat(newValue.timescale)) - (CGFloat(self.startTime.value) * CGFloat(self.startTime.timescale))
-            self.durationTime = CMTime(value: CMTimeValue(value / CGFloat(newValue.timescale)), timescale: newValue.timescale)
+            let value = (CGFloat(newValue.value) * CGFloat(newValue.timescale)) - (CGFloat(startTime.value) * CGFloat(startTime.timescale))
+            durationTime = CMTime(value: CMTimeValue(value / CGFloat(newValue.timescale)), timescale: newValue.timescale)
         }
         get {
-            return CMTime(value: CMTimeValue(CGFloat(self.startTime.value) + CGFloat(self.durationTime.value)), timescale: self.startTime.timescale)
+            CMTime(value: CMTimeValue(CGFloat(startTime.value) + CGFloat(durationTime.value)), timescale: startTime.timescale)
         }
     }
 
     public var durationTime: CMTime {
         set {
-            guard let asset = self.asset,
-            let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return }
-            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * self.frameWidth
-            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(constant)
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = -remainWidth
-            self.updateTotalTime()
+            guard let asset = asset,
+            let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first else { return }
+            let constant = ((CGFloat(newValue.value) * CGFloat(newValue.timescale)) / (CGFloat(asset.duration.value) * CGFloat(asset.duration.timescale))) * frameWidth
+            let remainWidth = frameWidth - abs(leadingConstraint.constant) - abs(constant)
+            frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = -remainWidth
+            updateTotalTime()
         }
         get {
-            guard let asset = self.asset,
-                let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
-                let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return .zero }
-            let remainWidth = self.frameWidth - abs(leadingConstraint.constant) - abs(trailingConstraint.constant)
+            guard let asset = asset,
+                let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
+                let trailingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return .zero }
+            let remainWidth = frameWidth - abs(leadingConstraint.constant) - abs(trailingConstraint.constant)
             let duration = asset.duration
             let value = CGFloat(duration.value)
-            let endTime = value * remainWidth / self.frameWidth
+            let endTime = value * remainWidth / frameWidth
             return CMTime(value: CMTimeValue(endTime), timescale: duration.timescale)
+        }
+    }
+
+    public var canTrimTime: Bool = true {
+        didSet {
+            trimStartTimeView.gestureRecognizers?.first { $0 is UIPanGestureRecognizer }?.isEnabled = canTrimTime
+            trimEndTimeView.gestureRecognizers?.first { $0 is UIPanGestureRecognizer }?.isEnabled = canTrimTime
         }
     }
 
     // asset
     open var asset: AVAsset? {
         didSet {
-            self.updateLayout()
-            if let asset = self.asset, asset.duration.value != 0 {
-                self.timeLabel.isHidden = false
-                self.totalTimeLabel.isHidden = false
-                self.frameContainerView.isHidden = false
-                self.trimStartTimeDimView.isHidden = false
-                self.trimEndTimeDimView.isHidden = false
+            updateLayout()
+            if let asset = asset, asset.duration.value != 0 {
+                if !isHiddenTime {
+                    timeContainerView.isHidden = false
+                }
+                frameContainerView.isHidden = false
+                trimStartTimeDimView.isHidden = false
+                trimEndTimeDimView.isHidden = false
             } else {
-                self.timeLabel.isHidden = true
-                self.totalTimeLabel.isHidden = true
-                self.frameContainerView.isHidden = true
-                self.trimStartTimeDimView.isHidden = true
-                self.trimEndTimeDimView.isHidden = true
+                timeContainerView.isHidden = true
+                frameContainerView.isHidden = true
+                trimStartTimeDimView.isHidden = true
+                trimEndTimeDimView.isHidden = true
             }
 
-            self.frameImages.forEach { (imageView) in
+            frameImages.forEach { (imageView) in
                 imageView.image = nil
                 imageView.showVisualEffect()
             }
-            if let asset = self.asset {
+            if let asset = asset {
                 let duration = asset.duration
                 let timescale = duration.timescale
                 let timescaleValue = CGFloat(timescale)
@@ -276,77 +291,87 @@ open class VideoTrim: UIView {
                         }
                     }
                 }
-                self.timeLabel.text = 0.time
-                self.totalTimeLabel.text = totalTime.time
+                timeLabel.text = 0.time
+                totalTimeLabel.text = totalTime.time
             }
-            self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
-            if self.trimMaximumDuration == .zero {
-                self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = 0
+            frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
+            if trimMaximumDuration == .zero {
+                frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = 0
             } else {
-                let duration = CGFloat(self.durationTime.value) / CGFloat(self.durationTime.timescale)
-                let maximumDuration = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+                let duration = CGFloat(durationTime.value) / CGFloat(durationTime.timescale)
+                let maximumDuration = CGFloat(trimMaximumDuration.value) / CGFloat(trimMaximumDuration.timescale)
                 if duration > maximumDuration {
-                    self.durationTime = self.trimMaximumDuration
+                    durationTime = trimMaximumDuration
                 }
             }
-            self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
+            frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
         }
     }
 
     // current time
     open var currentTime: CMTime? {
         didSet {
-            guard let asset = self.asset,
-                let current = self.currentTime,
-                let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
-                let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first,
-                let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return }
+            guard let asset = asset,
+                let current = currentTime,
+                let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first,
+                let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first,
+                let trailingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first else { return }
             let totalTime = CGFloat(asset.duration.value) / CGFloat(asset.duration.timescale)
             let currentTime = CGFloat(current.value) / CGFloat(current.timescale)
             let percentage = currentTime / totalTime
-            var leading = self.frameWidth * percentage
+            var leading = frameWidth * percentage
             if leading <= leadingConstraint.constant {
                 leading = leadingConstraint.constant
             }
-            if leading >= self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth {
-                leading = self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth
+            if leading >= frameWidth - abs(trailingConstraint.constant) - playLineWidth {
+                leading = frameWidth - abs(trailingConstraint.constant) - playLineWidth
             }
             playTimeLineViewLeadingConstraint.constant = leading
-            self.updatePlayTime()
+            updatePlayTime()
         }
     }
 
+    private lazy var stackView: UIStackView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.spacing = 6
+        $0.axis = .vertical
+        $0.distribution = .fillProportionally
+        return $0
+    }(UIStackView(arrangedSubviews: [timeContainerView, frameContainerView]))
+
+    private let timeContainerView: UIView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
+
     private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0:00"
-        return label
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "0:00"
+        return $0
+    }(UILabel())
 
     private let totalTimeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0:00"
-        return label
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "0:00"
+        return $0
+    }(UILabel())
 
     private let frameContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let frameView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private lazy var frameImages: [VisualEffectImageView] = {
         var imageViews = [VisualEffectImageView]()
-        for _ in 0..<self.frameImageCount {
+        for _ in 0..<frameImageCount {
             let imageView = VisualEffectImageView(frame: .zero)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.contentMode = .scaleAspectFill
@@ -358,341 +383,327 @@ open class VideoTrim: UIView {
     }()
 
     private let trimLineContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimLineView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimStartTimeLineView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimEndTimeLineView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimStartTimeView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimEndTimeView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimStartTimeDimView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let trimEndTimeDimView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let playTimeLineView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private let playTimeContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        return view
-    }()
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
 
     private var frameWidth: CGFloat {
-        if self.frameContainerView.bounds.width == 0 {
+        if frameContainerView.bounds.width == 0 {
             return 1
         } else {
-            return self.frameContainerView.bounds.width
+            return frameContainerView.bounds.width
         }
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.isUserInteractionEnabled = true
-        self.clipsToBounds = true
-        self.backgroundColor = .black
+        isUserInteractionEnabled = true
+        clipsToBounds = true
+        backgroundColor = .black
 
-        self.timeLabel.isHidden = true
-        self.totalTimeLabel.isHidden = true
-        self.frameContainerView.isHidden = true
-        self.trimStartTimeDimView.isHidden = true
-        self.trimEndTimeDimView.isHidden = true
+        timeContainerView.isHidden = true
+        frameContainerView.isHidden = true
+        trimStartTimeDimView.isHidden = true
+        trimEndTimeDimView.isHidden = true
 
-        self.addSubview(self.timeLabel)
-        self.addSubview(self.totalTimeLabel)
-        self.addSubview(self.frameContainerView)
-        self.frameContainerView.addSubview(self.frameView)
-        self.frameContainerView.addSubview(self.trimStartTimeDimView)
-        self.frameContainerView.addSubview(self.trimEndTimeDimView)
-        self.frameContainerView.addSubview(self.trimLineContainerView)
-        self.frameContainerView.addSubview(self.trimLineView)
-        self.frameContainerView.addSubview(self.trimStartTimeLineView)
-        self.frameContainerView.addSubview(self.trimEndTimeLineView)
-        self.frameContainerView.addSubview(self.trimStartTimeView)
-        self.frameContainerView.addSubview(self.trimEndTimeView)
-        self.frameContainerView.addSubview(self.playTimeLineView)
-        self.frameContainerView.addSubview(self.playTimeContainerView)
+        addSubview(stackView)
+        timeContainerView.addSubview(timeLabel)
+        timeContainerView.addSubview(totalTimeLabel)
+        frameContainerView.addSubview(frameView)
+        frameContainerView.addSubview(trimStartTimeDimView)
+        frameContainerView.addSubview(trimEndTimeDimView)
+        frameContainerView.addSubview(trimLineContainerView)
+        frameContainerView.addSubview(trimLineView)
+        frameContainerView.addSubview(trimStartTimeLineView)
+        frameContainerView.addSubview(trimEndTimeLineView)
+        frameContainerView.addSubview(trimStartTimeView)
+        frameContainerView.addSubview(trimEndTimeView)
+        frameContainerView.addSubview(playTimeLineView)
+        frameContainerView.addSubview(playTimeContainerView)
 
-        self.frameImages.forEach({ self.frameView.addSubview($0) })
+        frameImages.forEach { frameView.addSubview($0) }
+
+        // StackView
+        let stackViewTopConstraint = NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10)
+        stackViewTopConstraint.identifier = "stackViewTop"
+
+        let stackViewLeadingConstraint = NSLayoutConstraint(item: stackView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 20)
+        stackViewLeadingConstraint.identifier = "stackViewLeading"
+
+        let stackViewTrailingConstraint = NSLayoutConstraint(item: stackView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -20)
+        stackViewTrailingConstraint.identifier = "stackViewTrailing"
+
+        let stackViewBottomConstraint = NSLayoutConstraint(item: stackView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -16)
+        stackViewBottomConstraint.identifier = "stackViewBottom"
+
+        addConstraints([
+            stackViewTopConstraint,
+            stackViewLeadingConstraint,
+            stackViewTrailingConstraint,
+            stackViewBottomConstraint
+        ])
 
         // timeLabel
-        let timeLabelTopConstraint = NSLayoutConstraint(item: self.timeLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10)
-        timeLabelTopConstraint.identifier = "timeLabelTop"
-        self.addConstraints([
-            timeLabelTopConstraint
+        timeContainerView.addConstraints([
+            NSLayoutConstraint(item: timeLabel, attribute: .top, relatedBy: .equal, toItem: timeContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: timeLabel, attribute: .bottom, relatedBy: .equal, toItem: timeContainerView, attribute: .bottom, multiplier: 1, constant: 0),
         ])
 
-        // timeLabel & totalTimeLabel
-        self.addConstraints([
-            NSLayoutConstraint(item: self.timeLabel, attribute: .top, relatedBy: .equal, toItem: self.totalTimeLabel, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.timeLabel, attribute: .bottom, relatedBy: .equal, toItem: self.totalTimeLabel, attribute: .bottom, multiplier: 1, constant: 0)
+        // totalTimeLabel
+        timeContainerView.addConstraints([
+            NSLayoutConstraint(item: totalTimeLabel, attribute: .top, relatedBy: .equal, toItem: timeContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: totalTimeLabel, attribute: .bottom, relatedBy: .equal, toItem: timeContainerView, attribute: .bottom, multiplier: 1, constant: 0),
         ])
 
-        // timeLabel & trimStartTimeLineView
-        self.addConstraints([
-            NSLayoutConstraint(item: self.timeLabel, attribute: .centerX, relatedBy: .equal, toItem: self.trimStartTimeLineView, attribute: .centerX, multiplier: 1, constant: 0)
-        ])
+        let totalTimeLabelTrailingConstraint = NSLayoutConstraint(item: totalTimeLabel, attribute: .centerX, relatedBy: .equal, toItem: trimEndTimeLineView, attribute: .centerX, multiplier: 1, constant: 0)
+        totalTimeLabelTrailingConstraint.priority = UILayoutPriority(rawValue: 960)
 
-        // totalTimeLabel & trimEndTimeView
-        let totalTimeLabelCenterXConstraint = NSLayoutConstraint(item: self.totalTimeLabel, attribute: .centerX, relatedBy: .equal, toItem: self.trimEndTimeLineView, attribute: .centerX, multiplier: 1, constant: 0)
-        totalTimeLabelCenterXConstraint.priority = UILayoutPriority(rawValue: 950)
-        self.addConstraints([
-            totalTimeLabelCenterXConstraint
-        ])
-
-        // timeLabel & frameContainerView
-        self.addConstraints([
-            NSLayoutConstraint(item: self.timeLabel, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: -6)
+        stackView.addConstraints([
+            NSLayoutConstraint(item: timeLabel, attribute: .centerX, relatedBy: .equal, toItem: trimStartTimeLineView, attribute: .centerX, multiplier: 1, constant: 0),
+            totalTimeLabelTrailingConstraint
         ])
 
         // frameContainerView
-        let frameContainerViewBottomConstraint = NSLayoutConstraint(item: self.frameContainerView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -16)
-        frameContainerViewBottomConstraint.identifier = "frameContainerViewBottom"
-        let frameContainerViewLeadingConstraint = NSLayoutConstraint(item: self.frameContainerView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 20)
-        frameContainerViewLeadingConstraint.identifier = "frameContainerViewLeading"
-        let frameContainerViewTrailingConstraint = NSLayoutConstraint(item: self.frameContainerView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -20)
-        frameContainerViewTrailingConstraint.identifier = "frameContainerViewTrailing"
-        self.addConstraints([
-            frameContainerViewLeadingConstraint,
-            frameContainerViewTrailingConstraint,
-            frameContainerViewBottomConstraint
-        ])
-
-        // frameContainerView
-        let frameContainerViewHeightConstraint = NSLayoutConstraint(item: self.frameContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 48)
+        let frameContainerViewHeightConstraint = NSLayoutConstraint(item: frameContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 48)
         frameContainerViewHeightConstraint.identifier = "frameContainerViewHeight"
-        self.frameContainerView.addConstraints([
+        frameContainerView.addConstraints([
             frameContainerViewHeightConstraint
         ])
 
         // frameView
-        let frameViewTopConstraint = NSLayoutConstraint(item: self.frameView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0)
+        let frameViewTopConstraint = NSLayoutConstraint(item: frameView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0)
         frameViewTopConstraint.identifier = "frameViewTop"
-        let frameViewBottomConstraint = NSLayoutConstraint(item: self.frameView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
+        let frameViewBottomConstraint = NSLayoutConstraint(item: frameView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         frameViewBottomConstraint.identifier = "frameViewBottom"
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.frameView, attribute: .leading, relatedBy: .equal, toItem: self.frameContainerView, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.frameView, attribute: .trailing, relatedBy: .equal, toItem: self.frameContainerView, attribute: .trailing, multiplier: 1, constant: 0),
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: frameView, attribute: .leading, relatedBy: .equal, toItem: frameContainerView, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: frameView, attribute: .trailing, relatedBy: .equal, toItem: frameContainerView, attribute: .trailing, multiplier: 1, constant: 0),
             frameViewTopConstraint,
             frameViewBottomConstraint
         ])
 
         // trimLineContainerView
-        let trimContainerViewLeadingConstraint = NSLayoutConstraint(item: self.trimLineContainerView, attribute: .leading, relatedBy: .equal, toItem: self.frameContainerView, attribute: .leading, multiplier: 1, constant: 0)
+        let trimContainerViewLeadingConstraint = NSLayoutConstraint(item: trimLineContainerView, attribute: .leading, relatedBy: .equal, toItem: frameContainerView, attribute: .leading, multiplier: 1, constant: 0)
         trimContainerViewLeadingConstraint.identifier = "trimContainerViewLeading"
-        let trimContainerViewTrailingConstraint = NSLayoutConstraint(item: self.trimLineContainerView, attribute: .trailing, relatedBy: .equal, toItem: self.frameContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        let trimContainerViewTrailingConstraint = NSLayoutConstraint(item: trimLineContainerView, attribute: .trailing, relatedBy: .equal, toItem: frameContainerView, attribute: .trailing, multiplier: 1, constant: 0)
         trimContainerViewTrailingConstraint.identifier = "trimContainerViewTrailing"
-        self.frameContainerView.addConstraints([
+        frameContainerView.addConstraints([
             trimContainerViewLeadingConstraint,
             trimContainerViewTrailingConstraint,
-            NSLayoutConstraint(item: self.trimLineContainerView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimLineContainerView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: trimLineContainerView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimLineContainerView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
 
         // trimLineView
-        let trimLineViewLeadingConstraint = NSLayoutConstraint(item: self.trimLineView, attribute: .leading, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
+        let trimLineViewLeadingConstraint = NSLayoutConstraint(item: trimLineView, attribute: .leading, relatedBy: .equal, toItem: trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
         trimLineViewLeadingConstraint.identifier = "trimLineViewLeading"
-        let trimLineViewTrailingConstraint = NSLayoutConstraint(item: self.trimLineView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        let trimLineViewTrailingConstraint = NSLayoutConstraint(item: trimLineView, attribute: .trailing, relatedBy: .equal, toItem: trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
         trimLineViewTrailingConstraint.identifier = "trimLineViewTrailing"
-        self.frameContainerView.addConstraints([
+        frameContainerView.addConstraints([
             trimLineViewLeadingConstraint,
             trimLineViewTrailingConstraint,
-            NSLayoutConstraint(item: self.trimLineView, attribute: .top, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimLineView, attribute: .bottom, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: trimLineView, attribute: .top, relatedBy: .equal, toItem: trimLineContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimLineView, attribute: .bottom, relatedBy: .equal, toItem: trimLineContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
 
         // trimStartTimeLineView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeLineView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimStartTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimStartTimeLineView, attribute: .leading, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeLineView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimStartTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimStartTimeLineView, attribute: .leading, relatedBy: .equal, toItem: trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
         ])
 
         // trimStartTimeLineView
-        self.trimStartTimeLineView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 2)
+        trimStartTimeLineView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 2)
         ])
 
         // trimEndTimeLineView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeLineView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimEndTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimEndTimeLineView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeLineView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimEndTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimEndTimeLineView, attribute: .trailing, relatedBy: .equal, toItem: trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
         ])
 
         // trimEndTimeLineView
-        self.trimEndTimeLineView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 2)
+        trimEndTimeLineView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 2)
         ])
 
         // trimStartTimeView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimStartTimeView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimStartTimeView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
 
         // trimStartTimeView
-        self.trimStartTimeView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80)
+        trimStartTimeView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80)
         ])
 
         // trimStartTimeView & trimLineContainerView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeView, attribute: .leading, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .leading, multiplier: 1, constant: -60)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeView, attribute: .leading, relatedBy: .equal, toItem: trimLineContainerView, attribute: .leading, multiplier: 1, constant: -60)
         ])
 
         // trimEndTimeView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimEndTimeView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimEndTimeView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
 
         // trimEndTimeView
-        self.trimEndTimeView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80)
+        trimEndTimeView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80)
         ])
 
         // trimEndTimeView & trimLineContainerView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 60)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeView, attribute: .trailing, relatedBy: .equal, toItem: trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 60)
         ])
 
-        // self.trimStartTimeDimView & frameView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeDimView, attribute: .top, relatedBy: .equal, toItem: self.frameView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimStartTimeDimView, attribute: .bottom, relatedBy: .equal, toItem: self.frameView, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimStartTimeDimView, attribute: .leading, relatedBy: .equal, toItem: self.frameView, attribute: .leading, multiplier: 1, constant: 0)
+        // trimStartTimeDimView & frameView
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeDimView, attribute: .top, relatedBy: .equal, toItem: frameView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimStartTimeDimView, attribute: .bottom, relatedBy: .equal, toItem: frameView, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimStartTimeDimView, attribute: .leading, relatedBy: .equal, toItem: frameView, attribute: .leading, multiplier: 1, constant: 0)
         ])
 
-        // self.trimStartTimeDimView & trimLineContainerView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimStartTimeDimView, attribute: .trailing, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
+        // trimStartTimeDimView & trimLineContainerView
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimStartTimeDimView, attribute: .trailing, relatedBy: .equal, toItem: trimLineContainerView, attribute: .leading, multiplier: 1, constant: 0)
         ])
 
-        // self.trimEndTimeDimView & frameView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeDimView, attribute: .top, relatedBy: .equal, toItem: self.frameView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimEndTimeDimView, attribute: .bottom, relatedBy: .equal, toItem: self.frameView, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.trimEndTimeDimView, attribute: .trailing, relatedBy: .equal, toItem: self.frameView, attribute: .trailing, multiplier: 1, constant: 0)
+        // trimEndTimeDimView & frameView
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeDimView, attribute: .top, relatedBy: .equal, toItem: frameView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimEndTimeDimView, attribute: .bottom, relatedBy: .equal, toItem: frameView, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: trimEndTimeDimView, attribute: .trailing, relatedBy: .equal, toItem: frameView, attribute: .trailing, multiplier: 1, constant: 0)
         ])
 
-        // self.trimEndTimeDimView & trimLineContainerView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.trimEndTimeDimView, attribute: .leading, relatedBy: .equal, toItem: self.trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
+        // trimEndTimeDimView & trimLineContainerView
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: trimEndTimeDimView, attribute: .leading, relatedBy: .equal, toItem: trimLineContainerView, attribute: .trailing, multiplier: 1, constant: 0)
         ])
 
         // playTimeLineView
-        let playTimeLineViewLeadingConstraint = NSLayoutConstraint(item: self.playTimeLineView, attribute: .leading, relatedBy: .equal, toItem: self.frameContainerView, attribute: .leading, multiplier: 1, constant: 0)
+        let playTimeLineViewLeadingConstraint = NSLayoutConstraint(item: playTimeLineView, attribute: .leading, relatedBy: .equal, toItem: frameContainerView, attribute: .leading, multiplier: 1, constant: 0)
         playTimeLineViewLeadingConstraint.identifier = "playTimeLineViewLeading"
-        let playTimeLineViewTopConstraint = NSLayoutConstraint(item: self.playTimeLineView, attribute: .top, relatedBy: .equal, toItem: self.frameContainerView, attribute: .top, multiplier: 1, constant: -2)
+        let playTimeLineViewTopConstraint = NSLayoutConstraint(item: playTimeLineView, attribute: .top, relatedBy: .equal, toItem: frameContainerView, attribute: .top, multiplier: 1, constant: -2)
         playTimeLineViewTopConstraint.identifier = "playTimeLineViewTop"
-        let playTimeLineViewBottomConstraint = NSLayoutConstraint(item: self.playTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: self.frameContainerView, attribute: .bottom, multiplier: 1, constant: 2)
+        let playTimeLineViewBottomConstraint = NSLayoutConstraint(item: playTimeLineView, attribute: .bottom, relatedBy: .equal, toItem: frameContainerView, attribute: .bottom, multiplier: 1, constant: 2)
         playTimeLineViewBottomConstraint.identifier = "playTimeLineViewBottom"
-        self.frameContainerView.addConstraints([
+        frameContainerView.addConstraints([
             playTimeLineViewLeadingConstraint,
             playTimeLineViewTopConstraint,
             playTimeLineViewBottomConstraint
         ])
 
         // playTimeLineView
-        let playTimeLineViewWidthConstraint = NSLayoutConstraint(item: self.playTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 6)
+        let playTimeLineViewWidthConstraint = NSLayoutConstraint(item: playTimeLineView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 6)
         playTimeLineViewWidthConstraint.identifier = "playTimeLineViewWidth"
-        self.playTimeLineView.addConstraints([
+        playTimeLineView.addConstraints([
             playTimeLineViewWidthConstraint
         ])
 
         // playTimeContainerView
-        self.frameContainerView.addConstraints([
-            NSLayoutConstraint(item: self.playTimeContainerView, attribute: .top, relatedBy: .equal, toItem: self.playTimeLineView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.playTimeContainerView, attribute: .bottom, relatedBy: .equal, toItem: self.playTimeLineView, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: self.playTimeContainerView, attribute: .centerX, relatedBy: .equal, toItem: self.playTimeLineView, attribute: .centerX, multiplier: 1, constant: 0)
+        frameContainerView.addConstraints([
+            NSLayoutConstraint(item: playTimeContainerView, attribute: .top, relatedBy: .equal, toItem: playTimeLineView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: playTimeContainerView, attribute: .bottom, relatedBy: .equal, toItem: playTimeLineView, attribute: .bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: playTimeContainerView, attribute: .centerX, relatedBy: .equal, toItem: playTimeLineView, attribute: .centerX, multiplier: 1, constant: 0)
         ])
 
         // playTimeContainerView
-        self.playTimeContainerView.addConstraints([
-            NSLayoutConstraint(item: self.playTimeContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40)
+        playTimeContainerView.addConstraints([
+            NSLayoutConstraint(item: playTimeContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40)
         ])
 
         var beforeImage: UIImageView?
-        for imageView in self.frameImages {
+        for imageView in frameImages {
             if let beforeImage = beforeImage {
-                self.frameView.addConstraints([
+                frameView.addConstraints([
                     NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: beforeImage, attribute: .trailing, multiplier: 1, constant: 0),
                     NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: beforeImage, attribute: .width, multiplier: 1, constant: 0)
                 ])
             } else {
-                self.frameView.addConstraints([
-                    NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: self.frameView, attribute: .leading, multiplier: 1, constant: 0)
+                frameView.addConstraints([
+                    NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: frameView, attribute: .leading, multiplier: 1, constant: 0)
                 ])
             }
-            self.frameView.addConstraints([
-                NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: self.frameView, attribute: .top, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: self.frameView, attribute: .bottom, multiplier: 1, constant: 0)
+            frameView.addConstraints([
+                NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: frameView, attribute: .top, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: frameView, attribute: .bottom, multiplier: 1, constant: 0)
             ])
             beforeImage = imageView
         }
         if let beforeImage = beforeImage {
-            self.frameView.addConstraints([
-                NSLayoutConstraint(item: beforeImage, attribute: .trailing, relatedBy: .equal, toItem: self.frameView, attribute: .trailing, multiplier: 1, constant: 0)
+            frameView.addConstraints([
+                NSLayoutConstraint(item: beforeImage, attribute: .trailing, relatedBy: .equal, toItem: frameView, attribute: .trailing, multiplier: 1, constant: 0)
             ])
         }
 
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.emptyAction(_:))))
-        self.frameContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.emptyAction(_:))))
-        self.trimStartTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.trimStartTimeGesture(_:))))
-        self.trimEndTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.trimEndTimeGesture(_:))))
-        self.playTimeContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.playTimeGesture(_:))))
-        self.trimLineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.frameTap(_:))))
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
+        frameContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
+        trimStartTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimStartTimeGesture(_:))))
+        trimEndTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimEndTimeGesture(_:))))
+        playTimeContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(playTimeGesture(_:))))
+        trimLineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(frameTap(_:))))
     }
 
     public required init?(coder: NSCoder) {
@@ -749,9 +760,9 @@ open class VideoTrim: UIView {
     @objc private func emptyAction(_ sender: Any?) { }
 
     private func makeDuration(leading: CGFloat?, trailing: CGFloat?) -> CMTime? {
-        guard let asset = self.asset else { return nil }
-        var leadingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant
-        var trailingConstant = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant
+        guard let asset = asset else { return nil }
+        var leadingConstant = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant
+        var trailingConstant = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant
         if let leading = leading {
             leadingConstant = leading
         }
@@ -759,10 +770,10 @@ open class VideoTrim: UIView {
             trailingConstant = trailing
         }
         if let leadingConstant = leadingConstant, let trailingConstant = trailingConstant {
-            let remainWidth = self.frameWidth - abs(leadingConstant) - abs(trailingConstant)
+            let remainWidth = frameWidth - abs(leadingConstant) - abs(trailingConstant)
             let duration = asset.duration
             let value = CGFloat(duration.value)
-            let endTime = value * remainWidth / self.frameWidth
+            let endTime = value * remainWidth / frameWidth
             return CMTime(value: CMTimeValue(endTime), timescale: duration.timescale)
         } else {
             return nil
@@ -771,17 +782,17 @@ open class VideoTrim: UIView {
 
     @objc private func trimStartTimeGesture(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
-            self.delegate?.videoTrimStartTrimChange(self)
+            delegate?.videoTrimStartTrimChange(self)
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
-            self.delegate?.videoTrimEndTrimChange(self)
+            delegate?.videoTrimEndTrimChange(self)
         }
-        let point = sender.location(in: self.frameContainerView)
-        let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
+        let point = sender.location(in: frameContainerView)
+        let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
         let constant = point.x
-        let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
-        let remainWidth = self.frameWidth - abs((trailingConstraint?.constant ?? 0))
-        if self.trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: constant < 0 ? 0 : constant, trailing: nil) {
-            let maximumTime = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+        let trailingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
+        let remainWidth = frameWidth - abs((trailingConstraint?.constant ?? 0))
+        if trimMaximumDuration != .zero, let makeDuration = makeDuration(leading: constant < 0 ? 0 : constant, trailing: nil) {
+            let maximumTime = CGFloat(trimMaximumDuration.value) / CGFloat(trimMaximumDuration.timescale)
             let makeTime = CGFloat(makeDuration.value) / CGFloat(makeDuration.timescale)
             if maximumTime < makeTime {
                 return
@@ -789,38 +800,38 @@ open class VideoTrim: UIView {
         }
         if constant < 0 {
             leadingConstraint?.constant = 0
-            self.updateTotalTime()
-            self.updatePlayTime()
+            updateTotalTime()
+            updatePlayTime()
             return
-        } else if (constant + self.trimLineWidth*2 + self.trimReaminWidth) > remainWidth {
+        } else if (constant + trimLineWidth*2 + trimReaminWidth) > remainWidth {
             return
         }
         leadingConstraint?.constant = constant
-        self.updateTotalTime()
-        self.updatePlayTime()
-        if let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
+        updateTotalTime()
+        updatePlayTime()
+        if let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
             if constant > playTimeLineViewLeadingConstraint.constant {
                 playTimeLineViewLeadingConstraint.constant = constant
-                self.updatePlayTime()
-                self.delegate?.videoTrimPlayTimeChange(self)
+                updatePlayTime()
+                delegate?.videoTrimPlayTimeChange(self)
             }
         }
     }
     
     @objc private func trimEndTimeGesture(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
-            self.delegate?.videoTrimStartTrimChange(self)
+            delegate?.videoTrimStartTrimChange(self)
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
-            self.delegate?.videoTrimEndTrimChange(self)
+            delegate?.videoTrimEndTrimChange(self)
         }
-        let point = sender.location(in: self.frameContainerView)
-        let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
-        let constant = -(self.frameWidth - point.x)
+        let point = sender.location(in: frameContainerView)
+        let trailingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first
+        let constant = -(frameWidth - point.x)
         let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first
-        let remainWidth = self.frameWidth - abs((leadingConstraint?.constant ?? 0))
+        let remainWidth = frameWidth - abs((leadingConstraint?.constant ?? 0))
 
-        if self.trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: nil, trailing: constant > 0 ? 0 : constant) {
-            let maximumTime = CGFloat(self.trimMaximumDuration.value) / CGFloat(self.trimMaximumDuration.timescale)
+        if trimMaximumDuration != .zero, let makeDuration = self.makeDuration(leading: nil, trailing: constant > 0 ? 0 : constant) {
+            let maximumTime = CGFloat(trimMaximumDuration.value) / CGFloat(trimMaximumDuration.timescale)
             let makeTime = CGFloat(makeDuration.value) / CGFloat(makeDuration.timescale)
             if maximumTime < makeTime {
                 return
@@ -828,73 +839,73 @@ open class VideoTrim: UIView {
         }
         if constant > 0 {
             trailingConstraint?.constant = 0
-            self.updateTotalTime()
+            updateTotalTime()
             return
-        } else if (abs(constant) + self.trimLineWidth*2 + self.trimReaminWidth) > remainWidth {
+        } else if (abs(constant) + trimLineWidth*2 + trimReaminWidth) > remainWidth {
             return
         }
         trailingConstraint?.constant = constant
-        self.updateTotalTime()
-        if let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
-            if (self.frameWidth - abs(constant) - self.playLineWidth) < playTimeLineViewLeadingConstraint.constant {
-                playTimeLineViewLeadingConstraint.constant = self.frameWidth - abs(constant) - self.playLineWidth
-                self.updatePlayTime()
-                self.delegate?.videoTrimPlayTimeChange(self)
+        updateTotalTime()
+        if let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first {
+            if (frameWidth - abs(constant) - playLineWidth) < playTimeLineViewLeadingConstraint.constant {
+                playTimeLineViewLeadingConstraint.constant = frameWidth - abs(constant) - playLineWidth
+                updatePlayTime()
+                delegate?.videoTrimPlayTimeChange(self)
             }
         }
     }
 
     @objc private func playTimeGesture(_ sender: UIPanGestureRecognizer) {
         if sender.state == .began {
-            self.delegate?.videoTrimStartTrimChange(self)
+            delegate?.videoTrimStartTrimChange(self)
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
-            self.delegate?.videoTrimEndTrimChange(self)
+            delegate?.videoTrimEndTrimChange(self)
         }
         if sender.state == .changed {
-            let point = sender.location(in: self.frameContainerView)
-            let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first
+            let point = sender.location(in: frameContainerView)
+            let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first
             let constant = point.x
-            if let leadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first, let trailingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first {
+            if let leadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first, let trailingConstraint = frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first {
                 if leadingConstraint.constant > constant {
                     playTimeLineViewLeadingConstraint?.constant = leadingConstraint.constant
-                    self.updatePlayTime()
-                    self.delegate?.videoTrimPlayTimeChange(self)
+                    updatePlayTime()
+                    delegate?.videoTrimPlayTimeChange(self)
                     return
-                } else if constant > self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth {
-                    playTimeLineViewLeadingConstraint?.constant = self.frameWidth - abs(trailingConstraint.constant) - self.playLineWidth
-                    self.updatePlayTime()
-                    self.delegate?.videoTrimPlayTimeChange(self)
+                } else if constant > frameWidth - abs(trailingConstraint.constant) - playLineWidth {
+                    playTimeLineViewLeadingConstraint?.constant = frameWidth - abs(trailingConstraint.constant) - playLineWidth
+                    updatePlayTime()
+                    delegate?.videoTrimPlayTimeChange(self)
                     return
                 }
             }
             playTimeLineViewLeadingConstraint?.constant = constant
-            self.updatePlayTime()
-            self.delegate?.videoTrimPlayTimeChange(self)
+            updatePlayTime()
+            delegate?.videoTrimPlayTimeChange(self)
         }
     }
 
     @objc private func frameTap(_ sender: UITapGestureRecognizer) {
-        let point = sender.location(in: self.frameContainerView)
+        let point = sender.location(in: frameContainerView)
         let constant = point.x
-        let playTimeLineViewLeadingConstraint = self.frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first
-        playTimeLineViewLeadingConstraint?.constant = constant + (self.playLineWidth / 2)
-        self.updatePlayTime()
-        self.delegate?.videoTrimPlayTimeChange(self)
+        let playTimeLineViewLeadingConstraint = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first
+        playTimeLineViewLeadingConstraint?.constant = constant + (playLineWidth / 2)
+        updatePlayTime()
+        delegate?.videoTrimPlayTimeChange(self)
     }
 
     private func updatePlayTime() {
-        let time = self.playTime
+        let time = playTime
         if time == .zero {
-            self.timeLabel.text = 0.time
+            timeLabel.text = 0.time
         }
-        self.timeLabel.text = Int(ceil(CGFloat(time.value) / CGFloat(time.timescale))).time
+        timeLabel.text = Int(ceil(CGFloat(time.value) / CGFloat(time.timescale))).time
     }
 
     private func updateTotalTime() {
-        let time = self.durationTime
+        let time = durationTime
         if time == .zero {
-            self.totalTimeLabel.text = 0.time
+            totalTimeLabel.text = 0.time
         }
-        self.totalTimeLabel.text = Int(ceil(CGFloat(time.value) / CGFloat(time.timescale))).time
+        totalTimeLabel.text = Int(ceil(CGFloat(time.value) / CGFloat(time.timescale))).time
     }
 }
