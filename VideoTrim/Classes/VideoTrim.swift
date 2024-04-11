@@ -30,15 +30,25 @@ public protocol VideoTrimDelegate: AnyObject {
     func videoTrimPlayTimeChange(_ videoTrim: VideoTrim)
 }
 
+public extension VideoTrimDelegate {
+    func videoTrimStartTrimChange(_ videoTrim: VideoTrim) {}
+    func videoTrimEndTrimChange(_ videoTrim: VideoTrim) {}
+    func videoTrimPlayTimeChange(_ videoTrim: VideoTrim) {}
+}
+
 // MARK: VideoFrameView
 open class VideoTrim: UIView {
     public weak var delegate: VideoTrimDelegate?
 
     // Number of Frame View Images
-    public var frameImageCount = 20
+    public var frameImageCount = 20 {
+        didSet {
+            remakeFrameImages(count: frameImageCount)
+        }
+    }
 
     // Trim minimum length
-    public var trimReaminWidth: CGFloat = 50
+    public var trimRemainWidth: CGFloat = 50
 
     // Trim Maximum Duration
     public var trimMaximumDuration: CMTime = .zero
@@ -232,6 +242,19 @@ open class VideoTrim: UIView {
         }
     }
 
+    public var currentImage: UIImage? {
+        if asset != nil {
+            return imageTo(time: playTime)
+        } else {
+            guard let playTimeX = frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant else { return nil }
+            return frameView.subviews
+                .compactMap { $0 as? UIImageView }
+                .sorted(by: { $0.frame.origin.x < $1.frame.origin.x })
+                .first(where: { $0.frame.contains(.init(x: playTimeX, y: $0.frame.origin.y)) })?
+                .image
+        }
+    }
+
     // asset
     open var asset: AVAsset? {
         didSet {
@@ -248,6 +271,9 @@ open class VideoTrim: UIView {
                 frameContainerView.isHidden = true
                 trimStartTimeDimView.isHidden = true
                 trimEndTimeDimView.isHidden = true
+            }
+            if frameImages.count != frameImageCount {
+                remakeFrameImages(count: frameImageCount)
             }
 
             frameImages.forEach { (imageView) in
@@ -305,6 +331,42 @@ open class VideoTrim: UIView {
                 }
             }
             frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
+        }
+    }
+
+    open var images: [UIImage]? {
+        set {
+            asset = nil
+            timeContainerView.isHidden = true
+            guard let images = newValue else {
+                frameContainerView.isHidden = true
+                trimStartTimeDimView.isHidden = true
+                trimEndTimeDimView.isHidden = true
+                return
+            }
+            frameContainerView.isHidden = false
+            trimStartTimeDimView.isHidden = false
+            trimEndTimeDimView.isHidden = false
+            remakeFrameImages(count: images.count)
+
+            frameImages.forEach { (imageView) in
+                imageView.image = nil
+                imageView.showVisualEffect()
+            }
+
+            for (index, imageView) in frameImages.enumerated() {
+                if images.count > index {
+                    imageView.image = images[index]
+                }
+                imageView.hideVisualEffect()
+            }
+
+            frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewLeading" }).first?.constant = 0
+            frameContainerView.constraints.filter({ $0.identifier == "trimContainerViewTrailing" }).first?.constant = 0
+            frameContainerView.constraints.filter({ $0.identifier == "playTimeLineViewLeading" }).first?.constant = 0
+        }
+        get {
+            frameView.subviews.compactMap { $0 as? UIImageView }.compactMap { $0.image }
         }
     }
 
@@ -369,18 +431,7 @@ open class VideoTrim: UIView {
         return $0
     }(UIView())
 
-    private lazy var frameImages: [VisualEffectImageView] = {
-        var imageViews = [VisualEffectImageView]()
-        for _ in 0..<frameImageCount {
-            let imageView = VisualEffectImageView(frame: .zero)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.contentMode = .scaleAspectFill
-            imageView.backgroundColor = .clear
-            imageView.clipsToBounds = true
-            imageViews.append(imageView)
-        }
-        return imageViews
-    }()
+    private lazy var frameImages: [VisualEffectImageView] = []
 
     private let trimLineContainerView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -476,8 +527,6 @@ open class VideoTrim: UIView {
         frameContainerView.addSubview(trimEndTimeView)
         frameContainerView.addSubview(playTimeLineView)
         frameContainerView.addSubview(playTimeContainerView)
-
-        frameImages.forEach { frameView.addSubview($0) }
 
         // StackView
         let stackViewTopConstraint = NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10)
@@ -674,6 +723,49 @@ open class VideoTrim: UIView {
             NSLayoutConstraint(item: playTimeContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40)
         ])
 
+        remakeFrameImages(count: frameImageCount)
+
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
+        frameContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
+        trimStartTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimStartTimeGesture(_:))))
+        trimEndTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimEndTimeGesture(_:))))
+        playTimeContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(playTimeGesture(_:))))
+        trimLineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(frameTap(_:))))
+    }
+
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    public func imageTo(time: CMTime) -> UIImage? {
+        guard let asset = asset else { return nil }
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        guard let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) else { return nil }
+        let image = UIImage(cgImage: imageRef)
+        return image
+    }
+
+    private func remakeFrameImages(count: Int) {
+        var imageViews = [VisualEffectImageView]()
+        for _ in 0..<count {
+            let imageView = VisualEffectImageView(frame: .zero)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleAspectFill
+            imageView.backgroundColor = .clear
+            imageView.clipsToBounds = true
+            imageViews.append(imageView)
+        }
+        frameImages = imageViews
+
+        frameView.subviews.forEach {
+            frameView.removeConstraints($0.constraints)
+            $0.removeConstraints($0.constraints)
+            $0.removeFromSuperview()
+        }
+
+        frameImages.forEach { frameView.addSubview($0) }
+
         var beforeImage: UIImageView?
         for imageView in frameImages {
             if let beforeImage = beforeImage {
@@ -697,17 +789,6 @@ open class VideoTrim: UIView {
                 NSLayoutConstraint(item: beforeImage, attribute: .trailing, relatedBy: .equal, toItem: frameView, attribute: .trailing, multiplier: 1, constant: 0)
             ])
         }
-
-        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
-        frameContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(emptyAction(_:))))
-        trimStartTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimStartTimeGesture(_:))))
-        trimEndTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimEndTimeGesture(_:))))
-        playTimeContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(playTimeGesture(_:))))
-        trimLineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(frameTap(_:))))
-    }
-
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func updateLayout() {
@@ -803,7 +884,7 @@ open class VideoTrim: UIView {
             updateTotalTime()
             updatePlayTime()
             return
-        } else if (constant + trimLineWidth*2 + trimReaminWidth) > remainWidth {
+        } else if (constant + trimLineWidth*2 + trimRemainWidth) > remainWidth {
             return
         }
         leadingConstraint?.constant = constant
@@ -841,7 +922,7 @@ open class VideoTrim: UIView {
             trailingConstraint?.constant = 0
             updateTotalTime()
             return
-        } else if (abs(constant) + trimLineWidth*2 + trimReaminWidth) > remainWidth {
+        } else if (abs(constant) + trimLineWidth*2 + trimRemainWidth) > remainWidth {
             return
         }
         trailingConstraint?.constant = constant

@@ -1,5 +1,5 @@
 PODS:
-  - VideoTrim (0.1.6)
+  - VideoTrim (0.1.7)
 
 DEPENDENCIES:
   - VideoTrim (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  VideoTrim: ff8a4d2581a429ac8679c563d0007c592c4348b1
+  VideoTrim: 5f0192644a7189d95c76061fd36425e3e827383a
 
 PODFILE CHECKSUM: e28bb48aadb9229522e22b9bdf8bf508c19b5da1
 

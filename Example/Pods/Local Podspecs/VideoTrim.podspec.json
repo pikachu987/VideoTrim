@@ -1,6 +1,6 @@
 {
   "name": "VideoTrim",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "summary": "video trim setting",
   "description": "You can extract an image for each video frame as a video asset and set the start time and end time.",
   "homepage": "https://github.com/pikachu987/VideoTrim",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/pikachu987/VideoTrim.git",
-    "tag": "0.1.6"
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "9.0"
