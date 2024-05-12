@@ -731,6 +731,7 @@ open class VideoTrim: UIView {
         trimEndTimeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(trimEndTimeGesture(_:))))
         playTimeContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(playTimeGesture(_:))))
         trimLineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(frameTap(_:))))
+        trimLineView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(frameTap(_:))))
     }
 
     public required init?(coder: NSCoder) {
